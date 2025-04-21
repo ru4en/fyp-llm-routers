@@ -1,0 +1,9 @@
+[submodule "models/bart-large-mnli-tool-router"]
+	path = models/bart-large-mnli-tool-router
+	url = git@hf.co:ru4en/bart-large-mnli-tool-router.git
+[submodule "models/bart-large-mnli-tool-router-V2"]
+	path = models/bart-large-mnli-tool-router-V2
+	url = git@hf.co:ru4en/bart-large-mnli-tool-router.git
+[submodule "models/bart-large-mnli-agent-router"]
+	path = models/bart-large-mnli-agent-router
+	url = git@hf.co:ru4en/bart-large-mnli-agent-router.git
