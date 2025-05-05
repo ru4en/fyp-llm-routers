@@ -6,9 +6,9 @@
 > Author: *Ruben J. Lopes*  \
 > Date: *2025-05-04*  \
 > Supervised by: *Dr Xiaomin Chen*  \
-> FYP GitHub: *[ru4en/fyp-llm-routers](https://github.com/ru4en/fyp-llm-routers)*
-> Library GitHub: *[ru4en/llm-routers](https://github.com/ru4en/llm-routers)*
-> Website: *[fyp.rubenlopes.uk](https://fyp.rubenlopes.uk)*
+> FYP GitHub: *[ru4en/fyp-llm-routers](https://github.com/ru4en/fyp-llm-routers)* \
+> Library GitHub: *[ru4en/llm-routers](https://github.com/ru4en/llm-routers)* \
+> Website: *[fyp.rubenlopes.uk](https://fyp.rubenlopes.uk)* \
 > Poster: *[fyp.rubenlopes.uk/poster](https://fyp.rubenlopes.uk/poster)*
 ---
 
@@ -22,8 +22,8 @@ Routers for LLM is a framework for model selection and tool invocation. Its an i
 
 - `docs/poster`: poster for the final year project.
 - `docs/presentation`: presentation slides.
-- `docs/report`: Contains the report.
-- `docs/website`: Contains the website sources.
+- `docs/report`: Contains the report (PDF and LaTeX).
+- `docs/website`: Contains the website sources code.
 
 
 ### Models
@@ -136,3 +136,5 @@ tools = tool_router.route_query(input)
 print(f"Tools: {tools}")
 
 ```
+
+
