@@ -5,17 +5,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'README.md'
-      - 'docs/**'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'README.md'
-      - 'docs/**'
-
-  workflow_dispatch:
 
 permissions:
   contents: read
