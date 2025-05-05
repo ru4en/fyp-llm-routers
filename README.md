@@ -11,6 +11,16 @@
 > Website: *[fyp.rubenlopes.uk](https://fyp.rubenlopes.uk)* \
 > Poster: *[fyp.rubenlopes.uk/poster](https://fyp.rubenlopes.uk/poster)*
 ---
+## Table of Contents
+
+- [ thesis](docs/thesis)
+- [ poster](docs/poster)
+- [ presentation](docs/presentation)
+- [ notes](notes)
+- [ plan](plan)
+- [ reading list](reading-list)
+
+<!-- - [ Project Initiation Document](pid) -->
 
 ## Introduction
 
@@ -22,9 +32,7 @@ Routers for LLM is a framework for model selection and tool invocation. Its an i
 
 - `docs/poster`: poster for the final year project.
 - `docs/presentation`: presentation slides.
-- `docs/report`: Contains the report (PDF and LaTeX).
-- `docs/website`: Contains the website sources code.
-
+- `docs/thesis`: Contains the main thesis (PDF and LaTeX).
 
 ### Models
 - `models/llm_routers`: Contains the fine-tuned models for the framework.
