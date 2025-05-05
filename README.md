@@ -6,8 +6,10 @@
 > Author: *Ruben J. Lopes*  \
 > Date: *2025-05-04*  \
 > Supervised by: *Dr Xiaomin Chen*  \
-> GitHub: *[ru4en/fyp-llm-routers](https://github.com/ru4en/fyp-llm-routers)*
-
+> FYP GitHub: *[ru4en/fyp-llm-routers](https://github.com/ru4en/fyp-llm-routers)*
+> Library GitHub: *[ru4en/llm-routers](https://github.com/ru4en/llm-routers)*
+> Website: *[fyp.rubenlopes.uk](https://fyp.rubenlopes.uk)*
+> Poster: *[fyp.rubenlopes.uk/poster](https://fyp.rubenlopes.uk/poster)*
 ---
 
 ## Introduction
@@ -18,10 +20,10 @@ Routers for LLM is a framework for model selection and tool invocation. Its an i
 
 ### Documentation
 
-- `docs/poster`: Contains the poster using for the final year project presentation.
-- `docs/presentation`: Contains the presentation slides using for the final year project presentation.
-- `docs/whitepaper`: Contains the whitepaper using for the final year project presentation.
-- `docs/website`: Contains the website using for the final year project presentation.
+- `docs/poster`: poster for the final year project.
+- `docs/presentation`: presentation slides.
+- `docs/report`: Contains the report.
+- `docs/website`: Contains the website sources.
 
 
 ### Models
