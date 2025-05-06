@@ -17,7 +17,7 @@ concurrency:
 jobs:
   build-thesis:
     runs-on: ubuntu-latest
-    container: xu-cheng/texlive-full:latest
+    container: texlive/texlive:latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -25,7 +25,10 @@ jobs:
       - name: Build Thesis
         run: |
           cd thesis
-          latexmk -pdf main.tex
+          pdflatex main.tex
+          bibtex main
+          pdflatex main.tex
+          pdflatex main.tex
           mkdir -p ../dist
           cp main.pdf ../dist/thesis.pdf
 
