@@ -17,31 +17,13 @@ concurrency:
 jobs:
   build-thesis:
     runs-on: ubuntu-latest
+    container: xu-cheng/texlive-full:latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Cache TinyTeX
-        id: cache-tinytex
-        uses: actions/cache@v3
-        with:
-          path: ~/.TinyTeX
-          key: tinytex-${{ runner.os }}-${{ hashFiles('thesis/main.tex') }}
-
-      - name: Install TinyTeX
-        if: steps.cache-tinytex.outputs.cache-hit != 'true'
-        run: |
-          wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
-          export PATH="$HOME/.TinyTeX/bin/x86_64-linux:$PATH"
-          tlmgr install scheme-basic
-          tlmgr install latex-bin latexmk
-          tlmgr install collection-fontsrecommended
-          tlmgr install collection-latexextra
-          tlmgr install collection-pictures
-
       - name: Build Thesis
         run: |
-          export PATH="$HOME/.TinyTeX/bin/x86_64-linux:$PATH"
           cd thesis
           latexmk -pdf main.tex
           mkdir -p ../dist
@@ -55,12 +37,19 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    needs: build-thesis
     steps:
     - uses: actions/checkout@v4
+    
+    - name: Download thesis PDF
+      uses: actions/download-artifact@v4
+      with:
+        name: thesis-pdf
+        path: dist
+
     - uses: wranders/markdown-to-pages-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        # out_path_not_empty: true
         files: |-
           README.md
           docs/README.md
@@ -69,10 +58,11 @@ jobs:
           docs/pid/pid.md
           docs/plan/plan.md
           docs/reading-list/reading-list.md
-    - run: cp docs/thesis/main.pdf dist/thesis.pdf
+
     - uses: actions/upload-pages-artifact@v3
       with:
         path: dist
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
