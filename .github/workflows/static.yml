@@ -1,6 +1,5 @@
 name: Deploy static content to Pages
 
-
 on:
   push:
     branches:
@@ -16,6 +15,39 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  build-thesis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache LaTeX packages
+        id: cache-latex
+        uses: actions/cache@v3
+        with:
+          path: /usr/share/texlive
+          key: texlive-${{ runner.os }}-${{ hashFiles('thesis/main.tex') }}
+
+      - name: Install LaTeX
+        if: steps.cache-latex.outputs.cache-hit != 'true'
+        run: sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
+
+      - name: Build Thesis
+        run: |
+          cd thesis
+          pdflatex main.tex
+          bibtex main
+          pdflatex main.tex
+          pdflatex main.tex
+          mkdir -p ../dist
+          cp main.pdf ../dist/thesis.pdf
+
+      - name: Upload thesis artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: thesis-pdf
+          path: './dist'
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -32,7 +64,7 @@ jobs:
           docs/pid/pid.md
           docs/plan/plan.md
           docs/reading-list/reading-list.md
-    # - run: cp ./*.png ./dist/
+    - run: cp docs/thesis/main.pdf dist/thesis.pdf
     - uses: actions/upload-pages-artifact@v3
       with:
         path: dist
@@ -48,3 +80,5 @@ jobs:
     steps:
     - uses: actions/deploy-pages@v4
       id: deployment
+
+
