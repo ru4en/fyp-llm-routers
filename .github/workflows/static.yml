@@ -24,12 +24,13 @@ jobs:
 
       - name: Build Thesis
         run: |
-          pdflatex docs/thesis/main.tex
-          bibtex docs/thesis/main
-          pdflatex docs/thesis/main.tex
-          pdflatex docs/thesis/main.tex
-          mkdir -p ../dist
-          cp docs/thesis/main.pdf ../dist/thesis.pdf
+          cd docs/thesis
+          pdflatex main.tex
+          bibtex main
+          pdflatex main.tex
+          pdflatex main.tex
+          mkdir -p ../../dist
+          cp main.pdf ../../dist/thesis.pdf
 
       - name: Upload thesis artifact
         uses: actions/upload-artifact@v4
