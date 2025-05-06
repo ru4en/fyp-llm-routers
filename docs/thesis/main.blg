@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: agsm.bst
+Database file #1: references.bib
+Warning--I didn't find a database entry for "liveperson2024"
+Warning--I didn't find a database entry for "aws_routing2024"
+Warning--I didn't find a database entry for "clustering2024"
+You've used 6 entries,
+            2909 wiz_defined-function locations,
+            668 strings with 6536 characters,
+and the built_in function-call counts, 70019 in all, are:
+= -- 11542
+> -- 1281
+< -- 0
++ -- 6001
+- -- 413
+* -- 6486
+:= -- 13435
+add.period$ -- 6
+call.type$ -- 6
+change.case$ -- 84
+chr.to.int$ -- 6
+cite$ -- 6
+duplicate$ -- 66
+empty$ -- 157
+format.name$ -- 431
+if$ -- 12561
+int.to.chr$ -- 5
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 27
+num.names$ -- 66
+pop$ -- 48
+preamble$ -- 1
+purify$ -- 90
+quote$ -- 0
+skip$ -- 67
+stack$ -- 0
+substring$ -- 16908
+swap$ -- 6
+text.length$ -- 84
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 24
+warning$ -- 0
+while$ -- 126
+width$ -- 0
+write$ -- 86
+(There were 3 warnings)

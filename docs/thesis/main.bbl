@@ -1,0 +1,50 @@
+\begin{thebibliography}{xx}
+
+\harvarditem[Fu et~al.]{Fu, Jiang, Huang, Nie, Lu, Xue, He, Sit, Xue, Dong,
+  Miao, Zou, Ponti \harvardand\
+  Mai}{2025}{fu2025moecapbenchmarkingcostaccuracy}
+Fu, Y., Jiang, Y., Huang, Y., Nie, P., Lu, Z., Xue, L., He, C., Sit, M.-K.,
+  Xue, J., Dong, L., Miao, Z., Zou, K., Ponti, E. \harvardand\ Mai, L.
+  \harvardyearleft 2025\harvardyearright , `Moe-cap: Benchmarking cost,
+  accuracy and performance of sparse mixture-of-experts systems'.
+\newline\harvardurl{https://arxiv.org/abs/2412.07067}
+
+\harvarditem[Hu et~al.]{Hu, Bieker, Li, Jiang, Keigwin, Ranganath, Keutzer
+  \harvardand\ Upadhyay}{2024}{hu2024routerbenchbenchmarkmultillmrouting}
+Hu, Q.~J., Bieker, J., Li, X., Jiang, N., Keigwin, B., Ranganath, G., Keutzer,
+  K. \harvardand\ Upadhyay, S.~K.  \harvardyearleft 2024\harvardyearright ,
+  `Routerbench: A benchmark for multi-llm routing system'.
+\newline\harvardurl{https://arxiv.org/abs/2403.12031}
+
+\harvarditem[Kumar et~al.]{Kumar, Roh, Naseh, Karpinska, Iyyer, Houmansadr
+  \harvardand\ Bagdasarian}{2025}{kumar2025overthinkslowdownattacksreasoning}
+Kumar, A., Roh, J., Naseh, A., Karpinska, M., Iyyer, M., Houmansadr, A.
+  \harvardand\ Bagdasarian, E.  \harvardyearleft 2025\harvardyearright ,
+  `Overthink: Slowdown attacks on reasoning llms'.
+\newline\harvardurl{https://arxiv.org/abs/2502.02542}
+
+\harvarditem[Ong et~al.]{Ong, Almahairi, Wu, Chiang, Wu, Gonzalez, Kadous
+  \harvardand\ Stoica}{2025}{ong2025routellmlearningroutellms}
+Ong, I., Almahairi, A., Wu, V., Chiang, W.-L., Wu, T., Gonzalez, J.~E., Kadous,
+  M.~W. \harvardand\ Stoica, I.  \harvardyearleft 2025\harvardyearright ,
+  `Routellm: Learning to route llms with preference data'.
+\newline\harvardurl{https://arxiv.org/abs/2406.18665}
+
+\harvarditem[Schick et~al.]{Schick, Dwivedi-Yu, Dessì, Raileanu, Lomeli,
+  Zettlemoyer, Cancedda \harvardand\
+  Scialom}{2023}{schick2023toolformerlanguagemodelsteach}
+Schick, T., Dwivedi-Yu, J., Dessì, R., Raileanu, R., Lomeli, M., Zettlemoyer,
+  L., Cancedda, N. \harvardand\ Scialom, T.  \harvardyearleft
+  2023\harvardyearright , `Toolformer: Language models can teach themselves to
+  use tools'.
+\newline\harvardurl{https://arxiv.org/abs/2302.04761}
+
+\harvarditem[Wang et~al.]{Wang, Liu, Xu, Liang, Chen, He, Song, Yu, Li, Zhang,
+  Wang, Tu, Mi \harvardand\ Yu}{2025}{wang2025thoughtsplaceunderthinkingo1like}
+Wang, Y., Liu, Q., Xu, J., Liang, T., Chen, X., He, Z., Song, L., Yu, D., Li,
+  J., Zhang, Z., Wang, R., Tu, Z., Mi, H. \harvardand\ Yu, D.  \harvardyearleft
+  2025\harvardyearright , `Thoughts are all over the place: On the
+  underthinking of o1-like llms'.
+\newline\harvardurl{https://arxiv.org/abs/2501.18585}
+
+\end{thebibliography}

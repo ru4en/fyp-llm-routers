@@ -2,80 +2,30 @@
 \label{ch:lit_rev} %Label of the chapter lit rev. The key ``ch:lit_rev'' can be used with command \ref{ch:lit_rev} to refer this Chapter.
 
 \section{Large Language Models: Current Landscape}
-Large scale LLMs continue to grow in parameter count and capability, intensifying the trade off between performance and computational cost. Models such as OpenAI's GPT 4 and Google's Gemini 2.5 Pro deliver top tier results, but at significantly higher inference costs often 400 to 600 times more than comparable alternatives~\citep{openai_costs}. With many state of the art models being closed source (only accessible through an API), a new wave of open weight and open source models has emerged. These models make it easier for individuals and companies to self host, potentially lowering operational costs. For organisations offering inference as a service, open models are particularly advantageous not only for cost efficiency, but also for addressing privacy and security concerns associated with sending user prompts to third party providers.
+Large scale LLMs continue to grow in parameter count and capability, intensifying the trade off between performance and computational cost. Models such as OpenAI's GPT 4 and Google's Gemini 2.5 Pro deliver top tier results, but at significantly higher inference costs often 400 to 600 times more than comparable alternatives~\footnote{https://help.openai.com/en/articles/7127956-how-much-does-gpt-4-cost}. With many state of the art models being closed source (only accessible through an API), a new wave of open weight and open source models has emerged. These models make it easier for individuals and companies to self host, potentially lowering operational costs. For organisations offering inference as a service, open models are particularly advantageous not only for cost efficiency, but also for addressing privacy and security concerns associated with sending user prompts to third party providers.
 
 \section{Multi-Agent Systems and Distributed AI Architecture}
 Multi-agent systems (MAS) have been a subject of research and development since the 1980s. While traditional MAS research established fundamental principles by using agent communication protocols such as KQML and FIPA-ACL, the emergence of Large Language Models has transformed how these systems operate in practice.
 
-In December 2023, Mistral AI introduced Mixtral 8x7B, a model that employs a Sparse Mixture of Experts (MoE) architecture suggesting a promising approach which only activates a subset of a large model's ``experts'' per query. This gave them the edge over other models such as Llama 2 70B on most benchmarks where Inference was 6 times faster and even ``matches or outperforms GPT 3.5 on most benchmarks''~\citep{mixtral2024}. While Mixtral applies routing at the model architecture level rather than through a separate system level orchestration, it demonstrated the potential for such a middle layer.
+In December 2023, Mistral AI introduced Mixtral 8x7B, a model that employs a Sparse Mixture of Experts (MoE) architecture suggesting a promising approach which only activates a subset of a large model's ``experts'' per query \citep{fu2025moecapbenchmarkingcostaccuracy}. This gave them the edge over other models such as Llama 2 70B on most benchmarks where Inference was 6 times faster and even matches or outperforms GPT 3.5 on most benchmarks \citep{hu2024routerbenchbenchmarkmultillmrouting}. While Mixtral applies routing at the model architecture level rather than through a separate system level orchestration, it demonstrated the potential for such a middle layer.
 
 \section{Semantic Routing Mechanisms}
-Several recent projects provide router-like middleware to manage multi-model access. OpenRouter.ai provides a unified API that hides model providers behind a single endpoint, dynamically routing requests across providers to optimise cost and availability. On the open-source side, RouteLLM formalises LLM routing as a machine learning problem, with results showing ``cost reductions of over 85\% on MT Bench while still achieving 95\% of GPT-4's performance''~\citep{routellm2024}. Another routing mechanism, Router Bench, shows promise with over 405,000 inference outcomes from representative LLMs~\citep{routerbench2024}.
+Several recent projects provide router-like middleware to manage multi model access. OpenRouter.ai provides a unified API that hides model providers behind a single endpoint, dynamically routing requests across providers to optimise cost and availability. On the open source side, RouteLLM formalises LLM routing as a machine learning problem, with results showing ``cost reductions of over 85\% on MT Bench while still achieving 95\% of GPT 4's performance''~\footnote{https://lmsys.org/blog/2024-07-01-routellm}. Another routing mechanism, Router Bench, shows promise with over 405,000 inference outcomes from representative LLMs~\citep{hu2024routerbenchbenchmarkmultillmrouting}.
 
-On the tool routing side, landmark papers like Toolformer~\citep{toolformer2023} demonstrate how LLMs can learn to invoke tools. At the interface level, OpenAI's Function Calling and ``built-in tools'' features have begun to infer tool usage directly from user prompts.
+On the tool routing side, landmark papers like Toolformer~\citep{schick2023toolformerlanguagemodelsteach} demonstrate how LLMs can learn to invoke tools. At the interface level, OpenAI's Function Calling and ``built in tools'' features have begun to infer tool usage directly from user prompts.
 
 \section{Routing Approaches}
 In evaluating alternatives, several decision making mechanisms currently used by LLM services are:
 
 \begin{itemize}
-    \item \textbf{Rule-based routing:} This relies on predefined heuristic rules or configuration files~\citep{liveperson2024}. Each routing decision is directly traceable to an explicit rule~\citep{aws_routing2024}. However, it often lacks contextual understanding.
+    \item \textbf{Rule based routing:} This relies on predefined heuristic rules or configuration files~\citep{liveperson2024}. Each routing decision is directly traceable to an explicit rule~\citep{aws_routing2024}. However, it often lacks contextual understanding.
     
-    \item \textbf{Prompt-based routing:} This involves invoking a language model with a crafted system prompt. The model's response is passed to the relevant tool or agent.
+    \item \textbf{Prompt based routing:} This involves invoking a language model with a crafted system prompt. The model's response is passed to the relevant tool or agent.
     
     \item \textbf{Similarity Clustering based Routing:} This method leverages unsupervised clustering algorithms to group historical user queries~\citep{clustering2024}.
     
-    \item \textbf{NLI-based (zero-shot) routing:} This employs a pre-trained Natural Language Inference model for zero-shot intent classification.
+    \item \textbf{NLI based (zero shot) routing:} This employs a pre trained Natural Language Inference model for zero shot intent classification.
 \end{itemize}
 
 \section{Research Gap Analysis}
-As highlighted previously, multi-agent routing has been successfully implemented both as closed source (OpenRouter.ai) and in open source libraries such as RouteLLM. However, there remains significant opportunity for innovation in this space.
-
-\section{Example of in-text citation of references in \LaTeX} 
-% Note the use of \cite{} and \citep{}
-The references in a report relate your content with the relevant sources, papers, and the works of others. To include references in a report, we \textit{cite} them in the texts. In MS-Word, EndNote, or MS-Word references, or plain text as a list can be used. Similarly, in \LaTeX, you can use the ``thebibliography'' environment, which is similar to the plain text as a list arrangement like the MS word. However, In \LaTeX, the most convenient way is to use the BibTex, which takes the references in a particular format [see references.bib file of this template] and lists them in style [APA, Harvard, etc.] as we want with the help of proper packages.    
-
-These are the examples of how to \textit{cite} external sources, seminal works, and research papers. In \LaTeX, if you use ``\textbf{BibTex}'' you do not have to worry much since the proper use of a bibliographystyle package like ``agsm for the Harvard style'' and little rectification of the content in a BiBText source file [In this template, BibTex are stored in the ``references.bib'' file], we can conveniently generate  a reference style. 
-
-Take a note of the commands \textbackslash cite\{\} and \textbackslash citep\{\}. The command \textbackslash cite\{\} will write like ``Author et al. (2019)'' style for Harvard, APA and Chicago style. The command \textbackslash citep\{\} will write like ``(Author et al., 2019).'' Depending on how you construct a sentence, you need to use them smartly. Check the examples of \textbf{in-text citation} of sources listed here [This Department recommends the \textbf{Harvard style} of referencing.]:
-\begin{itemize}
-    \item \cite{kottwitzlatex2021} has written a comprehensive guide on writing in \LaTeX ~[Example of \textbackslash cite\{\} ].
-    \item If \LaTeX~is used efficiently and effectively, it helps in writing a very high-quality project report~\citep{lamport1994latex} ~[Example of \textbackslash citep\{\} ].   
-    \item A detailed APA, Harvard, and Chicago referencing style guide are available in~\citep{uor_refernce_style}.
-\end{itemize}
-
-\noindent 
-This is an example of how to construct a numbered list in \LaTeX, and it includes in-text, named and parenthetical citations:
-\begin{enumerate}
-    \item \cite{kottwitzlatex2021} has written a comprehensive guide on writing in \LaTeX.
-    \item If \LaTeX is used efficiently and effectively, it helps in writing a very high-quality project report~\citep{lamport1994latex}.   
-\end{enumerate}
-
-\subsection{Reference Resources}\label{subsec:reflinks}
-You can find additional referencing resources from the University Library:
-\begin{itemize}
-    \item \url{https://libguides.reading.ac.uk/computer-science}
-    \item \url{https://libguides.reading.ac.uk/citing-references/citationexamples}
-\end{itemize}
-
-% \subsection{Changing Bibliography Styles}
-% While this report used name and date formatting in the Harvard style, you might also wish to use a numbered style like that from IEEE.  To enable this change, you will need to edit the \path{CS_report.sty} file.  Uncomment the 2 lines of Harvard settings under \texttt{Bibliography/References settings}, and enable the IEEE style:
-
-% \begin{verbatim}
-% % IEEE, Numbered Style
-% \usepackage[numbers]{natbib}
-% \bibliographystyle{IEEEtran}
-% \end{verbatim}
-
-% Note that when making this change, you will need to modify the way in which you refer to authors by name, as this is no longer immediately automatic.  Instead, you will need to additionally rely on \verb|\citeauthor{}|.
-
-% \section{Avoiding unintentional plagiarism}
-% Using other sources, ideas, and material always bring with it a risk of unintentional plagiarism. 
-
-% \noindent
-% \textbf{\color{red}MUST}: do read the university guidelines on the definition of plagiarism as well as the guidelines on how to avoid plagiarism~\citep{uor_plagiarism, lamport1994latex}.
-
-% \section{Critique of the review} % Use this section title or choose a betterone
-% Describe your main findings and evaluation of the literature. ~\\
-
-% \section{Summary} 
-% Write a summary of this chapter~\\
+As highlighted previously, multi agent routing has been successfully implemented both as closed source (OpenRouter.ai) and in open source libraries such as RouteLLM. However, there remains significant opportunity for innovation in this space.
