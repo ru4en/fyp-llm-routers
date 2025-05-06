@@ -21,24 +21,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Cache LaTeX packages
-        id: cache-latex
+      - name: Cache TinyTeX
+        id: cache-tinytex
         uses: actions/cache@v3
         with:
-          path: /usr/share/texlive
-          key: texlive-${{ runner.os }}-${{ hashFiles('thesis/main.tex') }}
+          path: ~/.TinyTeX
+          key: tinytex-${{ runner.os }}-${{ hashFiles('thesis/main.tex') }}
 
-      - name: Install LaTeX
-        if: steps.cache-latex.outputs.cache-hit != 'true'
-        run: sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
+      - name: Install TinyTeX
+        if: steps.cache-tinytex.outputs.cache-hit != 'true'
+        run: |
+          wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+          export PATH="$HOME/.TinyTeX/bin/x86_64-linux:$PATH"
+          tlmgr install scheme-basic
+          tlmgr install latex-bin latexmk
+          tlmgr install collection-fontsrecommended
+          tlmgr install collection-latexextra
+          tlmgr install collection-pictures
 
       - name: Build Thesis
         run: |
+          export PATH="$HOME/.TinyTeX/bin/x86_64-linux:$PATH"
           cd thesis
-          pdflatex main.tex
-          bibtex main
-          pdflatex main.tex
-          pdflatex main.tex
+          latexmk -pdf main.tex
           mkdir -p ../dist
           cp main.pdf ../dist/thesis.pdf
 
