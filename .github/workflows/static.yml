@@ -53,6 +53,7 @@ jobs:
     - uses: wranders/markdown-to-pages-action@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        out_path_not_empty: true
         files: |-
           README.md
           docs/README.md
