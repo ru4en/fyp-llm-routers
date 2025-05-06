@@ -25,21 +25,10 @@ jobs:
       - name: Build Thesis
         run: |
           cd docs/thesis
-          # First pass
           pdflatex -interaction=nonstopmode main.tex || true
-          # Process bibliography
           bibtex main || true
-          # Process citations and cross-references
           pdflatex -interaction=nonstopmode main.tex || true
           pdflatex -interaction=nonstopmode main.tex
-          
-          # Show error log if build failed
-          if [ ! -f main.pdf ]; then
-            echo "LaTeX build failed. Here's the log:"
-            cat main.log
-            exit 1
-          fi
-
           mkdir -p ../../dist
           cp main.pdf ../../dist/thesis.pdf
 

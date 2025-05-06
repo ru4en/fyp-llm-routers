@@ -7,18 +7,22 @@
 > Date: *2025-05-04*  \
 > Supervised by: *Dr Xiaomin Chen*  \
 > FYP GitHub: *[ru4en/fyp-llm-routers](https://github.com/ru4en/fyp-llm-routers)* \
-> Library GitHub: *[ru4en/llm-routers](https://github.com/ru4en/llm-routers)* \
+> Library GitHub: *[ru4en/llm-routers](https://github.com/ru4en/llm_routers)* 
+>
+> 
 > Website: *[fyp.rubenlopes.uk](https://fyp.rubenlopes.uk)* \
-> Poster: *[fyp.rubenlopes.uk/poster](https://fyp.rubenlopes.uk/poster)*
----
+> Thesis: *[fyp.rubenlopes.uk/thesis](https://fyp.rubenlopes.uk/thesis.pdf)* \
+> Poster: *[fyp.rubenlopes.uk/poster](https://fyp.rubenlopes.uk/poster.pdf)* \
+> Presentation: *[fyp.rubenlopes.uk/presentation](https://fyp.rubenlopes.uk/presentation.pdf)*
+
 ## Table of Contents
 
-- [ thesis](docs/thesis)
-- [ poster](docs/poster)
-- [ presentation](docs/presentation)
-- [ notes](notes)
-- [ plan](plan)
-- [ reading list](reading-list)
+- [thesis](docs/thesis) [[PDF]](https://fyp.rubenlopes.uk/thesis.pdf)
+- [poster](docs/poster) [[PDF]](https://fyp.rubenlopes.uk/poster.pdf)
+- [presentation](docs/presentation) [[PDF]](https://fyp.rubenlopes.uk/presentation.pdf)
+- [ notes](notes)
+- [ plan](plan)
+- [ reading list](reading-list)
 
 <!-- - [ Project Initiation Document](pid) -->
 
