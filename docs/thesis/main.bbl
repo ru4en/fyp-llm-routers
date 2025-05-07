@@ -1,20 +1,18 @@
 \begin{thebibliography}{xx}
 
-\harvarditem[Fu et~al.]{Fu, Jiang, Huang, Nie, Lu, Xue, He, Sit, Xue, Dong,
-  Miao, Zou, Ponti \harvardand\
-  Mai}{2025}{fu2025moecapbenchmarkingcostaccuracy}
-Fu, Y., Jiang, Y., Huang, Y., Nie, P., Lu, Z., Xue, L., He, C., Sit, M.-K.,
-  Xue, J., Dong, L., Miao, Z., Zou, K., Ponti, E. \harvardand\ Mai, L.
-  \harvardyearleft 2025\harvardyearright , `Moe-cap: Benchmarking cost,
-  accuracy and performance of sparse mixture-of-experts systems'.
-\newline\harvardurl{https://arxiv.org/abs/2412.07067}
-
 \harvarditem[Hu et~al.]{Hu, Bieker, Li, Jiang, Keigwin, Ranganath, Keutzer
   \harvardand\ Upadhyay}{2024}{hu2024routerbenchbenchmarkmultillmrouting}
 Hu, Q.~J., Bieker, J., Li, X., Jiang, N., Keigwin, B., Ranganath, G., Keutzer,
   K. \harvardand\ Upadhyay, S.~K.  \harvardyearleft 2024\harvardyearright ,
   `Routerbench: A benchmark for multi-llm routing system'.
 \newline\harvardurl{https://arxiv.org/abs/2403.12031}
+
+\harvarditem[Jiang et~al.]{Jiang, Xu, Gao, Sun, Liu, Dwivedi-Yu, Yang, Callan
+  \harvardand\ Neubig}{2023}{jiang2023activeretrievalaugmentedgeneration}
+Jiang, Z., Xu, F.~F., Gao, L., Sun, Z., Liu, Q., Dwivedi-Yu, J., Yang, Y.,
+  Callan, J. \harvardand\ Neubig, G.  \harvardyearleft 2023\harvardyearright ,
+  `Active retrieval augmented generation'.
+\newline\harvardurl{https://arxiv.org/abs/2305.06983}
 
 \harvarditem[Kumar et~al.]{Kumar, Roh, Naseh, Karpinska, Iyyer, Houmansadr
   \harvardand\ Bagdasarian}{2025}{kumar2025overthinkslowdownattacksreasoning}
@@ -38,6 +36,15 @@ Schick, T., Dwivedi-Yu, J., Dessì, R., Raileanu, R., Lomeli, M., Zettlemoyer,
   2023\harvardyearright , `Toolformer: Language models can teach themselves to
   use tools'.
 \newline\harvardurl{https://arxiv.org/abs/2302.04761}
+
+\harvarditem[Varangot-Reille et~al.]{Varangot-Reille, Bouvard, Gourru,
+  Ciancone, Schaeffer \harvardand\
+  Jacquenet}{2025}{varangotreille2025doingimplementingrouting}
+Varangot-Reille, C., Bouvard, C., Gourru, A., Ciancone, M., Schaeffer, M.
+  \harvardand\ Jacquenet, F.  \harvardyearleft 2025\harvardyearright , `Doing
+  more with less -- implementing routing strategies in large language
+  model-based systems: An extended survey'.
+\newline\harvardurl{https://arxiv.org/abs/2502.00409}
 
 \harvarditem[Wang et~al.]{Wang, Liu, Xu, Liang, Chen, He, Song, Yu, Li, Zhang,
   Wang, Tu, Mi \harvardand\ Yu}{2025}{wang2025thoughtsplaceunderthinkingo1like}

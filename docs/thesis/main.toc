@@ -1,20 +1,49 @@
-\contentsline {chapter}{List of Figures}{v}{chapter*.5}%
-\contentsline {chapter}{List of Tables}{vi}{chapter*.6}%
+\contentsline {chapter}{List of Figures}{vi}{chapter*.5}%
+\contentsline {chapter}{List of Tables}{vii}{chapter*.6}%
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Problem statement}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Research Objectives}{2}{section.1.2}%
 \contentsline {chapter}{\numberline {2}Literature Review}{3}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Large Language Models: Current Landscape}{3}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Multi-Agent Systems and Distributed AI Architecture}{3}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Semantic Routing Mechanisms}{3}{section.2.3}%
+\contentsline {section}{\numberline {2.2}Multi Agent Systems and Distributed AI Architecture}{3}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Semantic Routing Mechanisms}{4}{section.2.3}%
 \contentsline {section}{\numberline {2.4}Routing Approaches}{4}{section.2.4}%
-\contentsline {section}{\numberline {2.5}Research Gap Analysis}{4}{section.2.5}%
-\contentsline {chapter}{\numberline {3}Methodology}{5}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Results}{6}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Discussion and Analysis}{7}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Conclusions and Future Work}{8}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Reflection}{9}{chapter.7}%
-\contentsline {chapter}{References}{10}{chapter*.8}%
-\contentsline {chapter}{Appendices}{11}{section*.9}%
-\contentsline {chapter}{\numberline {A}An Appendix Chapter (Optional)}{11}{appendix.1.A}%
-\contentsline {chapter}{\numberline {B}An Appendix Chapter (Optional)}{12}{appendix.1.B}%
+\contentsline {section}{\numberline {2.5}Research Gap Analysis}{5}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Methodology}{6}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Research Design}{6}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Base Model Selection}{6}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Generic Prompt-to-Topic Router}{7}{subsection.3.2.1}%
+\contentsline {section}{\numberline {3.3}Python Library Development}{7}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Evaluation framework creation}{8}{subsection.3.3.1}%
+\contentsline {subsubsection}{Plugin integration with existing AI systems}{8}{section*.8}%
+\contentsline {subsection}{\numberline {3.3.2}Fine-tuning of base NLI model}{8}{subsection.3.3.2}%
+\contentsline {chapter}{\numberline {4}Implementation}{9}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Router Development}{9}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Generic Prompt to Topic Router (Prototype)}{9}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Python Library (Development)}{9}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Library Architecture Design Principles}{10}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Evaluation Framework Creation}{11}{subsection.4.1.4}%
+\contentsline {subsubsection}{Testing Script}{11}{section*.10}%
+\contentsline {subsubsection}{Demo CLI Script}{11}{section*.11}%
+\contentsline {subsection}{\numberline {4.1.5}Synthetic Dataset Generation}{12}{subsection.4.1.5}%
+\contentsline {subsection}{\numberline {4.1.6}Plugin Integration with Existing Systems - OpenWebUI (Integration)}{12}{subsection.4.1.6}%
+\contentsline {section}{\numberline {4.2}Fine Tuned Model}{13}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Training Dataset}{13}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Data Cleaning}{13}{subsection.4.2.2}%
+\contentsline {subsubsection}{4.4.2 Finetuning Process}{14}{section*.12}%
+\contentsline {section}{\numberline {4.3}System Architecture}{14}{section.4.3}%
+\contentsline {subsubsection}{4.2.1 Overview of the Two Stage Routing Architecture}{14}{section*.13}%
+\contentsline {subsubsection}{4.2.2 Model Router: Intelligent Selection of Processing Engines}{14}{section*.14}%
+\contentsline {subsubsection}{Tool Router: Extending Model Capabilities Through External Functions}{16}{section*.18}%
+\contentsline {subsubsection}{Integration and Information Flow}{17}{section*.19}%
+\contentsline {subsection}{\numberline {4.3.1}Plugin Integration with Existing Systems}{17}{subsection.4.3.1}%
+\contentsline {subsubsection}{Model Router Plugin}{17}{section*.20}%
+\contentsline {subsubsection}{Tool Router Plugin}{19}{section*.24}%
+\contentsline {subsubsection}{Security Router Plugin}{21}{section*.28}%
+\contentsline {chapter}{\numberline {5}Results}{22}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Discussion and Analysis}{23}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Conclusions and Future Work}{24}{chapter.7}%
+\contentsline {chapter}{References}{25}{chapter*.29}%
+\contentsline {chapter}{Appendices}{26}{section*.30}%
+\contentsline {chapter}{\numberline {A}An Appendix Chapter (Optional)}{26}{appendix.1.A}%
+\contentsline {chapter}{\numberline {B}An Appendix Chapter (Optional)}{27}{appendix.1.B}%

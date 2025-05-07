@@ -103,6 +103,18 @@ We evaluated possible models against the following criteria:
 3. **Licensing Considerations**: Only models with permissive licensing terms suitable for both research and potential commercial applications were considered.
 
 For the experimental evaluation, well select the open weights model: `facebook/bart-large-mnli`
+This model was selected for its strong performance on zero-shot classification tasks, particularly in the context of Natural Language Inference (NLI). BART-Large-MNLI is a transformer-based model that has been pre-trained on a large corpus of text and fine-tuned for NLI tasks, making it well-suited for the routing system's requirements. The model's architecture allows it to effectively understand and classify complex prompts, making it an ideal candidate for the routing system.
+
+Some of the key features of the BART-Large-MNLI model include:
+- **Transformer Architecture**: BART-Large-MNLI is based on the transformer architecture, which has proven to be highly effective for a wide range of natural language processing tasks. This architecture allows the model to capture complex relationships between words and phrases in text, making it well-suited for understanding and classifying prompts.
+
+- **Pre-trained on Large Datasets**: The model has been pre-trained on a large corpus of text, enabling it to leverage a wealth of knowledge and context when processing prompts. This pre-training helps the model generalise well to various tasks and domains.
+
+- **Fine-tuned for NLI Tasks**: BART-Large-MNLI has been specifically fine-tuned for natural language inference tasks, which involve determining the relationship between a premise and a hypothesis. This fine-tuning makes the model particularly adept at understanding the nuances of language and context, allowing it to classify prompts effectively.
+
+
+## Chapter 4: Router Development
+
 
 ### 4.3 Generic Prompt-to-Topic Router (Development)
 
@@ -123,7 +135,7 @@ agent_router
 
 ### 4.4 Python Library (Development)
 
-The third phase transformed the prototype router into a well-structured, extensible Python library suitable for integration into various applications and workflows. This development followed software engineering best practices to ensure code quality, maintainability, and usability. The complete codebase is available at `https://github.com/ru4en/llm_routers` and can be installed via pip:
+The next phase involved creating a Python library to encapsulate the routing functionality. This library is designed to be modular, extensible, and user-friendly, allowing developers to easily integrate it into their existing systems. The library is structured to support multiple routing mechanisms, including the basic prompt-to-topic router, agent selection router, and tool selection router.
 
 ```
 pip install git+https://github.com/ru4en/llm_routers.git
@@ -217,10 +229,13 @@ For the Training Dataset I will assemble and curate several datasets to support 
 #### 4.4.2 Data Cleaning
 
 During the Data Cleaning for the `SoftAge-AI/prompt-eng_dataset` dataset I loaded the raw data from the Hub using the Hugging Face `datasets` library’s `load_dataset` function, which seamlessly handles JSON and Parquet formats from both local and remote repositories. The dataset contained nested fields where each record comprised a JSON encoded conversation log and a JSON list of tool specifications. I implemented a custom parser to extract the first user utterance and the first tool’s description from each record, handling `JSONDecodeError`, missing keys and empty lists robustly. Following extraction, I applied a filter step to remove any rows where parsing failed or returned empty strings. This reduced the raw corpus of approximately 551,285 examples to 441,028 valid training samples and 110,257 test samples, ensuring high quality inputs for downstream tokenisation and model training.
+
 #### 4.4.2 Finetuning Process
 I selected the sequence classification variant of the BART large NLI model (`facebook/bart-large-mnli`) as our backbone, owing to its strong zero-shot and fine-tuning performance on sentence-pair tasks. The model’s configuration was adapted to the 73 target classes as per the dataset and supplying corresponding `id2label` and `label2id` mappings.
 For optimisation, I used the `Trainer` API, which abstracts the training loop and automates gradient accumulation, checkpointing and metric logging. Finetuning proceeded for one epoch, yielding stable training loss trajectories below 0.001 by step 1240. The final model was saved locally and its mapping tables exported to JSON for deployment.
+
 ### 4.2 System Architecture
+
 #### 4.2.1 Overview of the Two-Stage Routing Architecture
 
 The system architecture implements an elegant yet powerful two-stage cascading router design that optimises both performance and functionality. While the system may appear complex at first glance, its fundamental structure follows a logical progression that systematically processes user prompts to deliver optimal results. The architecture consists of two primary components working in sequence: a **Model Router** followed by a **Tool Router**.
@@ -263,6 +278,8 @@ After the appropriate model has been selected, the Tool Router provides the seco
 1. Analyses the prompt to identify specific functional requirements that might benefit from specialised tools
 2. Selects appropriate external utilities from its available toolset
 3. Orchestrates the interaction between the selected model and tools via standardised function calling interfaces
+
+
 #### 4.2.4 Integration and Information Flow
 
 The complete system operates as a seamless processing pipeline:
@@ -277,53 +294,47 @@ The complete system operates as a seamless processing pipeline:
 8. A comprehensive response is returned to the user
 
 This architecture enables sophisticated query handling that dynamically adapts to varying prompt requirements while maintaining system efficiency. By separating model selection from tool selection, the system achieves a high degree of flexibility and extensibility, allowing for independent optimization of each component.
-```mermaid
-flowchart TD
-    %% Define custom styles
-    classDef queryStyle fill:#FFDDC1,stroke:#333,stroke-width:2px;
-    classDef routerStyle fill:#C1E1FF,stroke:#333,stroke-width:2px;
-    classDef modelStyle fill:#C1FFC1,stroke:#333,stroke-width:2px;
-    classDef toolStyle fill:#FFFFC1,stroke:#333,stroke-width:2px;
-    
-    %% Query and Evaluation
-    A[User Query]:::queryStyle
-    
-    %% Model Routing Mechanism
-    C{Model Router}:::modelStyle
-    A --> C
-    
-    D[Cost-effective Model]:::modelStyle
-    E[High-performance Model]:::modelStyle
-    F[Domain-specific Model]:::modelStyle
-    
-    C -->|Low-cost Routing| D
-    C -->|High-resource Routing| E
-    C -->|Domain-specific Routing| F
-    D -.->|Return to User| A
-    E -.->|Return to User| A
-    F -.->|Return to User| A
 
-    %% Tool Routing for Domain-specific Model
-    G{Tool Router}:::toolStyle
-    F --> G
-    H[Specialised Tool]:::toolStyle
-    G -->|Invoke Tool| H
-    H -.->|Return to Domain Model| F
-```
+In this script, we set up a simple command-line interface that allows users to input prompts and receive routing results. The script uses the `AgentRouter`, `ToolRouter`, and `Router` classes from the `llm_routers` library to route the input prompt to the appropriate agents, tools, and complexity levels. The results are printed in a user-friendly format.
 
-### 4.3 Model Router Implementation
-#### 4.3.1 Model Router Development
-![[Untitled Diagram.drawio(5).png]]
-#### 4.3.2 Tool Invocation Router Development
-![[Untitled Diagram.drawio(6) 1.png]]
-### 4.3.3 Security Guardrail Router Development
-![[Untitled Diagram.drawio(4).png]]
+For the demo script, we also added a signal handler to gracefully shut down the routers when the user interrupts the script (e.g., by pressing Ctrl+C). This ensures that any resources used by the routers are properly released.
 
-### 5.1 Cost-Effectiveness Quantification
+### 5.1 Plugin Integration with Existing Systems
 
-### 5.2 Domain Specificity Detection
+To demonstrate the practical applicability of the routing system, we integrated the `llm_routers` library with an existing AI interface. The integration process involved creating plugins for OpenWebUI, a popular open-source web-based interface for interacting with large language models.
 
-### 5.3 Decision-Making Algorithms
+OpenWebUI allows users to interact with various AI models and tools through a web interface. Its a platform that supports custom plugins, via the admin panel, enabling developers to extend its functionality by adding new `functions` and `tools`. Using the functions system, we can create plugins that route user queries to the appropriate agents and tools based on the routing decisions made by the `llm_routers` library. 
+
+Creating a plugin for OpenWebUI involves reading the OpenWebUI documentation from [https://docs.openwebui.com/pipelines/pipes/] and following the guidelines for plugin development.
+
+#### 5.2 Model Router Plugin
+
+My first obstacle was that the OpenWebUI API to get the list of available models was not working. I had to manually create a list of models and their descriptions. The API however was working for the tools. which updated the list of available tools if new tools were added or removed.
+
+For the Model Router plugin, to pass this obstacle I created a dictionary of available models and their descriptions. The plugin required a `pipe` class with a `pipe` method that runs after the user input is received. The `pipe` method then calls the `AgentRouter` classes from the `llm_routers` library to route the user query to the appropriate agents. The plugin current returns a debug like messege with chosen agent and some other information without actually running the agent or infrencing any agent. This was done to keep the plugin simple and easy to understand just the core functionality of the router. Although the plugin can be extended to run the agent in the future.
+
+[Example of the Model Router using the OpenWebUI API]
+
+##### 5.3 Tool Router Plugin
+
+The Tool Router plugin is similar to the Model Router plugin, but since the OpenWebUI API was working for the tools, I was able to use the API to get the list of available tools and their descriptions. The plugin first gets the list of available tools from the OpenWebUI API and initialises the `ToolRouter` class. 
+
+Since the Tool Router plugin is more complex than the Model Router plugin, this plugin used a `filter` method from OpenWebUI. Where the `filter` method allows the plugin to modify the user input before and after the inference. The `inlet` method is called before the user input is sent to the model, and the `outlet` method is called after the model output is received. This allows the plugin to modify the user input and model output before and after the inference.
+
+Since we need to select the tool before the user input is sent to the model, we used the `inlet` method to route the user input to the appropriate tools. Here we used the `ToolRouter` class to route the user input to the appropriate tools. 
+
+Within this plugin I also got the chance to work with other APIs that OpenWebUI provides. For example, the `EventEmitter` API allows the plugin to show a message in the OpenWebUI interface. This was used to show the user which tools were selected for the user input.
+
+[Example of the Tool Router using the OpenWebUI API]
+
+#### 5.4 Security Router Plugin
+
+Simalar to the Model Router this too uses the `Pipe` class and the `pipe` method to route the user input to the appropriate security guardrail.
+
+Since the security guardrail is a simple text classification task, we used the `Router` class from the `llm_routers` library to catogorise the user input into either `prompt injection`, `Data Leakage`, `Model Evasion`, `Adversarial Examples`, `Malicious Code` or `Malicious Query`. The plugin then returns a debug like message with the selected type of attack and the confidence score. Since this is a rather complex task, the plugin is not very accurate and is not recommended for use. Although the plugin can be extended to use a more complex model or by using a fine tuned model as described in the previous section.
+
+[Example of the Security Router using the OpenWebUI API]
+
 
 ### 5.4 Performance Analysis
 

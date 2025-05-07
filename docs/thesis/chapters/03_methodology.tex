@@ -1,4 +1,78 @@
-% replace all text with your own text.
-% in this template few examples are mention
 \chapter{Methodology}
 \label{ch:method} % Label for method chapter
+
+\section{Research Design}
+
+This study employs an experimental research design to develop and evaluate a routing system for existing large language model interfaces. The approach draws from both software engineering methodologies and machine learning research practices to create a systematic framework for development and testing. The research follows an iterative development methodology, beginning with the selection of a foundational NLI and progressing through the creation of increasingly sophisticated routing mechanisms. The ultimate goal is to produce a modular, extensible, and user-friendly Python library that can be integrated into various AI applications.
+
+The methodology consists of seven distinct phases:
+
+\begin{enumerate}
+    \item Base NLI model selection
+    \item Generic Router prototype development
+    \item Library Development And Architecture Design
+    \item Evaluation framework creation
+    \begin{enumerate}
+        \item Automated Testing Script
+        \item User Interaction CLI Tools
+    \end{enumerate}
+    \item Synthetic dataset generation (for testing)
+    \item Plugin integration with existing AI systems
+    \item Fine-tuning of base NLI model
+\end{enumerate}
+
+Each phase builds upon the previous ones, with continuous evaluation and refinement throughout the process. This iterative approach allows us to incorporate findings from earlier stages into subsequent development, creating a feedback loop that strengthens the overall system design.
+
+\section{Base Model Selection}
+
+The initial phase involves selecting an appropriate foundation model and model architecture to serve as the cognitive engine for the routing system. This selection process considers several critical factors that directly impact the viability and performance of the resulting system.
+
+We evaluated possible models against the following criteria:
+
+\begin{itemize}
+    \item \textbf{Classification Performance:} The model must demonstrate strong capabilities in text classification and categorisation tasks.
+    \item \textbf{Inference Speed:} Given that routing decisions must occur with minimal latency to maintain system responsiveness, we established maximum acceptable response time thresholds based on human perception studies. Models exceeding these thresholds were eliminated from consideration regardless of their performance on other metrics.
+    \item \textbf{Licensing Considerations:} Only models with permissive licensing terms suitable for both research and potential commercial applications were considered.
+\end{itemize}
+
+For the experimental evaluation, we selected the open weights model: \texttt{facebook/bart-large-mnli}.
+
+This model was selected for its strong performance on zero-shot classification tasks, particularly in the context of NLI; BART-Large-MNLI is a transformer-based model that has been pre-trained on a large corpus of text and fine-tuned for NLI tasks, making it well suited for the routing system's requirements. The model's architecture allows it to effectively understand and classify complex prompts, making it an ideal candidate for the routing system.
+
+Some of the key features of the BART-Large-MNLI model include:
+
+\begin{itemize}
+    \item \textbf{Transformer Architecture:} BART-Large-MNLI is based on the transformer architecture, which has proven to be highly effective for a wide range of natural language processing tasks. This architecture allows the model to capture complex relationships between words and phrases in text, making it well-suited for understanding and classifying prompts.
+    \item \textbf{Pre-trained on Large Datasets:} The model has been pre-trained on a large corpus of text, enabling it to leverage a wealth of knowledge and context when processing prompts. This pre-training helps the model generalise well to various tasks and domains.
+    \item \textbf{Fine-tuned for NLI Tasks:} BART-Large-MNLI has been specifically fine-tuned for natural language inference tasks, which involve determining the relationship between a premise and a hypothesis. This fine-tuning makes the model particularly adept at understanding the nuances of language and context, allowing it to classify prompts effectively.
+\end{itemize}
+
+
+\subsection{Generic Prompt-to-Topic Router}
+\label{sec:generic_router_dev}
+Following model selection, The next phase involved developing a prototype router capable of classifying incoming prompts into predefined topic categories. This prototype served as the foundation for subsequent development efforts and allowed us to establish baseline performance metrics. The router is accessible via the \texttt{llm\_routers} library as the \texttt{Router()} class.
+
+The Library is designed to have 3 main components one for each of the routing mechanisms. With a generic router for prompt to topic routing, a router for agent selection, and a router for tool selection.
+
+\section{Python Library Development}
+\label{sec:router_dev}
+
+The main goal of this project is to develop a routing framework that can easily integrate with existing AI systems. Keeping this in mind, using the BART-Large-MNLI model as a base, and building upon the initial router prototype, I will develop a modular and extensible routing system that can be easily integrated into existing AI systems. Furthermore, the system will deployed as a Python library, allowing for easy installation and use in various applications.
+
+Following strict software engineering principles, the library will follow software design patterns and best practices to ensure maintainability, extensibility, and ease of use. The main source code for the library is available on GitHub at \url{https://github.com/ru4en/llm_routers.git}. A CI/CD pipeline will be set up to ensure that the code is automatically deployed as a package that can be installed via pip. Linters and formatters will be used to ensure that the code is clean and easy to read asweell.
+
+
+\subsection{Evaluation framework creation}
+\label{sec:evaluation_framework}
+
+A simple evaluation framework consisting of a set of automated tests and a command line tool for user interaction would also be a good addition so that users can easily test the library and see how it works. Aditionally, a set of synthetic datasets might be needed to test the library and see how it performs in different scenarios. Most likely, the datasets will be generated using a LLM such as Chat GPT or Claude.
+
+\subsubsection{Plugin integration with existing AI systems}
+\label{sec:plugin_integration}
+
+To Finally demonstrate the effectiveness of the routing system, I will integrate it with an existing AI system. A good candidate for this is the Open Web UI, which is a popular open source project that provides a web interface for interacting with LLMs. Has a large community and is actively maintained and allows for easy integration with plugins written in Python.
+
+\subsection{Fine-tuning of base NLI model}
+\label{sec:fine_tuning}
+
+Finally, I will also explore the possibility of fine-tuning the base NLI model with a dataset that is specifically designed for routing tasks. This will allow us to see if we can improve the performance of the model and make it more suitable for our specific use case. The fine-tuning process will involve training the model on a dataset that contains examples of prompts and their corresponding topics, allowing the model to learn the relationships between them.
