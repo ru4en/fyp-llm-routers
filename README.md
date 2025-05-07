@@ -106,8 +106,6 @@ python src/test/demo.py
 ```python
 from llm_routers import AgentRouter, ToolRouter, Router
 
-# Create an agent router
-
 AGENTS = [
         {"agent": "This is agent 1"},
         {"agent2": "This is agent 2"},

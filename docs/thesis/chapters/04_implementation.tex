@@ -29,12 +29,13 @@ agent_router
 
 
 
+Whilst prototyping the router, I used a simple dictionary to define the topics and their descriptions. Initially, Router was designed with no error handling or logging, and it was not modular. It was simply a wrapper around the \texttt{pipeline} function to demo a proof of concept. 
+
+Using the \texttt{pipeline} function I also tried out a few different models to see how they performed such as \texttt{sileod/deberta-v3-base-tasksource-nli} and \texttt{MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7}. The results were promising, with the \texttt{facebook/bart-large-mnli} model performing well with the synthetic dataset.
 
 
 \subsection{Python Library
 (Development)}\label{python library development}
-
-% ### TODO: ADD MORE IN THIS SECTION
 
 
 
@@ -42,6 +43,28 @@ The next phase involved creating a Python library that extends the generic route
 it into their existing systems. The library is structured to support
 multiple routing mechanisms, including the basic prompt to topic router,
 agent selection router, and tool selection router.
+
+
+Internally, the router uses the \texttt{pipeline} function from the \texttt{transformers} library to set up a zero-shot classification pipeline. This pipeline enables the router to determine the topic of an input prompt without requiring prior training on the specific topics. The \texttt{route\_query} method is used to classify a given prompt.
+
+\paragraph{Model Initialisation:} When the \texttt{Router} class is initialised the classification model using the \texttt{pipeline} function. If a user specified model is unavailable, the router falls back to a default model such as \texttt{facebook/bart-large-mnli}.
+
+\paragraph{Query Processing:} The \texttt{route\_query} method either runs the classification synchronously or asynchronously (depending on the configuration). It uses the \texttt{\_classify\_query} method to perform the actual classification.
+
+\paragraph{Score Mapping:} The router maps the classification results back to the topic names and returns the top scoring topics based on a threshold. Eg like in the example above, the prompt "Dr Who display extends hours to attract visitors" was classified as "Entertainment" with a confidence score of 0.73494.
+
+\paragraph{Fallback Mechanism:} If the custom model initialisation fails, the router defaults to a robust pre trained model like \texttt{facebook/bart-large-mnli} And is warned using logging.
+
+\subsubsection*{Performance and Utility}
+
+This prototype serves as the foundation for later development efforts by offering:
+
+\begin{itemize}
+    \item \textbf{Flexibility:} New topics and descriptions can be added easily by modifying the input dictionary.
+    \item \textbf{Baseline Metrics:} The router provides baseline performance data for prompt classification tasks.
+    \item \textbf{Extensibility:} The modular structure allows for future enhancements, such as fine-tuning the model or adding additional classification features.
+\end{itemize}
+
 
 
 

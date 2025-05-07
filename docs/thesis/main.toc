@@ -20,30 +20,34 @@
 \contentsline {chapter}{\numberline {4}Implementation}{9}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Router Development}{9}{section.4.1}%
 \contentsline {subsection}{\numberline {4.1.1}Generic Prompt to Topic Router (Prototype)}{9}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Python Library (Development)}{9}{subsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.1.3}Library Architecture Design Principles}{10}{subsection.4.1.3}%
-\contentsline {subsection}{\numberline {4.1.4}Evaluation Framework Creation}{11}{subsection.4.1.4}%
-\contentsline {subsubsection}{Testing Script}{11}{section*.10}%
-\contentsline {subsubsection}{Demo CLI Script}{11}{section*.11}%
-\contentsline {subsection}{\numberline {4.1.5}Synthetic Dataset Generation}{12}{subsection.4.1.5}%
-\contentsline {subsection}{\numberline {4.1.6}Plugin Integration with Existing Systems - OpenWebUI (Integration)}{12}{subsection.4.1.6}%
-\contentsline {section}{\numberline {4.2}Fine Tuned Model}{13}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Training Dataset}{13}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Data Cleaning}{13}{subsection.4.2.2}%
-\contentsline {subsubsection}{4.4.2 Finetuning Process}{14}{section*.12}%
-\contentsline {section}{\numberline {4.3}System Architecture}{14}{section.4.3}%
-\contentsline {subsubsection}{4.2.1 Overview of the Two Stage Routing Architecture}{14}{section*.13}%
-\contentsline {subsubsection}{4.2.2 Model Router: Intelligent Selection of Processing Engines}{14}{section*.14}%
-\contentsline {subsubsection}{Tool Router: Extending Model Capabilities Through External Functions}{16}{section*.18}%
-\contentsline {subsubsection}{Integration and Information Flow}{17}{section*.19}%
-\contentsline {subsection}{\numberline {4.3.1}Plugin Integration with Existing Systems}{17}{subsection.4.3.1}%
-\contentsline {subsubsection}{Model Router Plugin}{17}{section*.20}%
-\contentsline {subsubsection}{Tool Router Plugin}{19}{section*.24}%
-\contentsline {subsubsection}{Security Router Plugin}{21}{section*.28}%
-\contentsline {chapter}{\numberline {5}Results}{22}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Discussion and Analysis}{23}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Conclusions and Future Work}{24}{chapter.7}%
-\contentsline {chapter}{References}{25}{chapter*.29}%
-\contentsline {chapter}{Appendices}{26}{section*.30}%
-\contentsline {chapter}{\numberline {A}An Appendix Chapter (Optional)}{26}{appendix.1.A}%
-\contentsline {chapter}{\numberline {B}An Appendix Chapter (Optional)}{27}{appendix.1.B}%
+\contentsline {subsection}{\numberline {4.1.2}Python Library (Development)}{10}{subsection.4.1.2}%
+\contentsline {paragraph}{Model Initialisation:}{10}{section*.9}%
+\contentsline {paragraph}{Query Processing:}{10}{section*.10}%
+\contentsline {paragraph}{Score Mapping:}{10}{section*.11}%
+\contentsline {paragraph}{Fallback Mechanism:}{10}{section*.12}%
+\contentsline {subsection}{\numberline {4.1.3}Library Architecture Design Principles}{11}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Evaluation Framework Creation}{12}{subsection.4.1.4}%
+\contentsline {subsubsection}{Testing Script}{12}{section*.15}%
+\contentsline {subsubsection}{Demo CLI Script}{12}{section*.16}%
+\contentsline {subsection}{\numberline {4.1.5}Synthetic Dataset Generation}{13}{subsection.4.1.5}%
+\contentsline {subsection}{\numberline {4.1.6}Plugin Integration with Existing Systems - OpenWebUI (Integration)}{13}{subsection.4.1.6}%
+\contentsline {section}{\numberline {4.2}Fine Tuned Model}{14}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Training Dataset}{14}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Data Cleaning}{14}{subsection.4.2.2}%
+\contentsline {subsubsection}{4.4.2 Finetuning Process}{15}{section*.17}%
+\contentsline {section}{\numberline {4.3}System Architecture}{15}{section.4.3}%
+\contentsline {subsubsection}{4.2.1 Overview of the Two Stage Routing Architecture}{15}{section*.18}%
+\contentsline {subsubsection}{4.2.2 Model Router: Intelligent Selection of Processing Engines}{15}{section*.19}%
+\contentsline {subsubsection}{Tool Router: Extending Model Capabilities Through External Functions}{17}{section*.23}%
+\contentsline {subsubsection}{Integration and Information Flow}{18}{section*.24}%
+\contentsline {subsection}{\numberline {4.3.1}Plugin Integration with Existing Systems}{18}{subsection.4.3.1}%
+\contentsline {subsubsection}{Model Router Plugin}{18}{section*.25}%
+\contentsline {subsubsection}{Tool Router Plugin}{20}{section*.29}%
+\contentsline {subsubsection}{Security Router Plugin}{22}{section*.33}%
+\contentsline {chapter}{\numberline {5}Results}{23}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Discussion and Analysis}{24}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Conclusions and Future Work}{25}{chapter.7}%
+\contentsline {chapter}{References}{26}{chapter*.34}%
+\contentsline {chapter}{Appendices}{27}{section*.35}%
+\contentsline {chapter}{\numberline {A}An Appendix Chapter (Optional)}{27}{appendix.1.A}%
+\contentsline {chapter}{\numberline {B}An Appendix Chapter (Optional)}{28}{appendix.1.B}%

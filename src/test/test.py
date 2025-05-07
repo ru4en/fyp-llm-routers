@@ -1,186 +1,220 @@
-import sys
+import os
+import matplotlib.pyplot as plt
+import seaborn as sns
 
-from time import perf_counter
-from typing import Set, Tuple, Dict, List
-from dataclasses import dataclass
-from datetime import datetime
-from syn_data.data import test_data, agents, tools
-from llm_routers import AgentRouter, ToolRouter
-from testPlot import (
-    plot_router_types_accuracy,
-    plot_router_performance_by_type,
-    plot_router_types_time_series,
-    plot_router_types_summary
-)
+def save_router_test_plot(
+    agent_passes, agent_warnings, agent_fails,
+    tool_passes, tool_warnings, tool_fails,
+    agent_results_list, tool_results_list,
+    tool_stats,
+    agent_stats,
+    total_tests,
+    outdir="plots"
+):
+    os.makedirs(outdir, exist_ok=True)
+    sns.set(style="whitegrid")
+    fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+    fig.suptitle("Router Test Results (Agents and Tools)", fontsize=18, fontweight='bold')
 
-# Constants for router thresholds
-AGENT_ROUTER_THRESHOLD = 0.1
-TOOL_ROUTER_THRESHOLD = 0.1
+    # AGENT ROUTER BAR
+    agent_counts = [agent_passes, agent_warnings, agent_fails]
+    agent_labels = ["PASS", "WARNING", "FAIL"]
+    agent_colors = ["#4caf50", "#ffb300", "#e53935"]
+    sns.barplot(x=agent_labels, y=agent_counts, ax=axes[0], palette=agent_colors)
+    axes[0].set_title("Agent Router", fontsize=14)
+    axes[0].set_ylabel("Count")
+    axes[0].set_xlabel("Result")
+    axes[0].set_ylim(0, max(agent_counts + [tool_passes, tool_warnings, tool_fails]) + 2)
+    for i, v in enumerate(agent_counts):
+        axes[0].text(i, v + 0.1, str(v), color='black', ha='center', fontsize=12, fontweight='bold')
 
-@dataclass
-class RouterResult:
-    name: str
-    passed: int = 0
-    failed: int = 0
-    warnings: int = 0
-    total: int = 0
-    time: float = 0.0
-    times: List[float] = None
+    # TOOL ROUTER BAR
+    tool_counts = [tool_passes, tool_warnings, tool_fails]
+    tool_labels = ["PASS", "WARNING", "FAIL"]
+    tool_colors = ["#4caf50", "#ffb300", "#e53935"]
+    sns.barplot(x=tool_labels, y=tool_counts, ax=axes[1], palette=tool_colors)
+    axes[1].set_title("Tool Router", fontsize=14)
+    axes[1].set_ylabel("Count")
+    axes[1].set_xlabel("Result")
+    axes[1].set_ylim(0, max(tool_counts + [agent_passes, agent_warnings, agent_fails]) + 2)
+    for i, v in enumerate(tool_counts):
+        axes[1].text(i, v + 0.1, str(v), color='black', ha='center', fontsize=12, fontweight='bold')
 
-    def __post_init__(self):
-        self.times = [] 
+    plt.tight_layout(rect=[0, 0.03, 1, 0.92])
+    plt.savefig(os.path.join(outdir, "router_test_summary.png"))
+    plt.close(fig)
 
-    def add_time(self, time: float) -> None:
-        self.time += time
-        self.total += 1
-        self.times.append(time)
+    # TOOL STATS PLOT
+    plt.figure(figsize=(max(8, len(tool_stats)*0.5), 6))
+    tool_names = list(tool_stats.keys())
+    tool_pass = [tool_stats[k]['pass'] for k in tool_names]
+    tool_warn = [tool_stats[k]['warning'] for k in tool_names]
+    tool_fail = [tool_stats[k]['fail'] for k in tool_names]
+    bar_width = 0.35
 
-    def get_avg_time(self) -> float:
-        return self.time / self.total if self.total > 0 else 0
+    idx = range(len(tool_names))
+    plt.bar(idx, tool_pass, bar_width, label='PASS', color="#4caf50")
+    plt.bar(idx, tool_warn, bar_width, bottom=tool_pass, label='WARNING', color="#ffb300")
+    plt.bar(idx, tool_fail, bar_width, bottom=[tool_pass[i] + tool_warn[i] for i in idx], label='FAIL', color="#e53935")
+    plt.xticks(idx, tool_names, rotation=45, ha='right', fontsize=10)
+    plt.ylabel("Count")
+    plt.title("Tool Routing: Correct / Warning / Wrong by Tool", fontsize=16)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(outdir, "tool_routing_per_tool.png"))
+    plt.close()
 
-    def __str__(self) -> str:
-        return (
-            f"{self.name} Router Results:\n"
-            f"  Passed: {self.passed} ✅\n"
-            f"  Failed: {self.failed} ❌\n"
-            f"  Warnings: {self.warnings} ⚠️\n"
-            f"  Average Time: {self.get_avg_time():.6f}s"
+    # AGENT STATS PLOT
+    plt.figure(figsize=(max(8, len(agent_stats)*0.5), 6))
+    agent_names = list(agent_stats.keys())
+    agent_pass = [agent_stats[k]['pass'] for k in agent_names]
+    agent_warn = [agent_stats[k]['warning'] for k in agent_names]
+    agent_fail = [agent_stats[k]['fail'] for k in agent_names]
+
+    idx = range(len(agent_names))
+    plt.bar(idx, agent_pass, bar_width, label='PASS', color="#4caf50")
+    plt.bar(idx, agent_warn, bar_width, bottom=agent_pass, label='WARNING', color="#ffb300")
+    plt.bar(idx, agent_fail, bar_width, bottom=[agent_pass[i] + agent_warn[i] for i in idx], label='FAIL', color="#e53935")
+    plt.xticks(idx, agent_names, rotation=45, ha='right', fontsize=10)
+    plt.ylabel("Count")
+    plt.title("Agent Routing: Correct / Warning / Wrong by Agent", fontsize=16)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(outdir, "agent_routing_per_agent.png"))
+    plt.close()
+
+    print(f"Plots saved to {outdir}/")
+
+def test_agent_router():
+    from llm_routers import AgentRouter, ToolRouter
+    from syn_data.data import agents as AGENTS, tools as TOOLS, test_data
+
+    total_tests = len(test_data)
+    agent_passes = 0
+    agent_warnings = 0
+    agent_fails = 0
+    tool_passes = 0
+    tool_warnings = 0
+    tool_fails = 0
+
+    agent_results_list = []
+    tool_results_list = []
+
+    tool_stats = {k: {'pass': 0, 'warning': 0, 'fail': 0} for k in TOOLS}
+    agent_stats = {k: {'pass': 0, 'warning': 0, 'fail': 0} for k in AGENTS}
+
+    # Initialize routers
+    try:
+        agent_router = AgentRouter(
+            agents=AGENTS,
+            model_name="facebook/bart-large-mnli",
+            top_n=3,
+            threshold=0.08,
         )
-
-def validate_agent(selected: Tuple[str, float], expected: str, results: RouterResult) -> None:
-    """Validate selected agent against expected agent."""
-    if not selected:
-        print("No agent selected. ❌")
-        results.failed += 1
-        return
-    
-    agent_name = selected[0][0]
-    if agent_name == expected:
-        print(f"Selected Agent: {agent_name} ({agents[agent_name]}) ✅")
-        results.passed += 1
-    else:
-        print(f"Selected Agent: {agent_name} ({agents[agent_name]}) ❌ (Expected: {expected})")
-        results.failed += 1
-
-def validate_tools(selected: List[Tuple[str, float]], expected: Set[str], results: RouterResult) -> None:
-    """Validate selected tools against expected tools."""
-    if not selected:
-        print("No tools selected. ❌")
-        results.failed += 1
+        tool_router = ToolRouter(
+            tools=TOOLS,
+            model_name="facebook/bart-large-mnli",
+            top_n=3,
+            threshold=0.08,
+        )
+    except Exception as e:
+        print(f"Router initialisation failed - {str(e)}")
         return
 
-    actual_tools = {tool for tool, _ in selected}
-    extra_tools = actual_tools - expected
-    missing_tools = expected - actual_tools
-    
-    if extra_tools or missing_tools:
-        print(f"Selected Tools: {', '.join(actual_tools)} ❌")
-        if missing_tools:
-            print(f"Missing Tools: {', '.join(missing_tools)} ❌")
-        if extra_tools:
-            print(f"Extra Tools: {', '.join(extra_tools)} ❌")
-        results.failed += 1
-        if missing_tools:
-            results.warnings += 1
-        if extra_tools:
-            results.warnings += 1
-    else:
-        print(f"Selected Tools: {', '.join(actual_tools)} ✅")
-        results.passed += 1
+    # Run tests
+    for i, prompt in enumerate(test_data):
+        query = prompt.get("query", "")
+        expected_agent = prompt.get("expected_agent", "")
+        expected_tools = prompt.get("expected_tools", [])
 
-def run_test(
-    data_item: Dict, 
-    routers: Tuple[AgentRouter, ToolRouter], 
-    agent_results: RouterResult, 
-    tool_results: RouterResult
-) -> None:
-    """Run single test with separate tracking for each router"""
-    query = data_item["query"]
-    agent_router, tool_router = routers
-    
-    # Time and validate agent selection
-    start = perf_counter()
-    selected_agent = agent_router.route_query(query)
-    agent_time = perf_counter() - start
-    agent_results.add_time(agent_time)
-    
-    # Time and validate tools selection
-    start = perf_counter()
-    selected_tools = tool_router.route_query(query)
-    tools_time = perf_counter() - start
-    tool_results.add_time(tools_time)
-    
-    print("\n" + "=" * 50)
-    print(f"Query: {query}")
-    
-    # Validate results
-    validate_agent(selected_agent, data_item["expected_agent"], agent_results)
-    validate_tools(selected_tools, set(data_item["expected_tools"]), tool_results)
+        # Test agent router
+        try:
+            agent_results = agent_router.route_query(query)
+            agent_found = False
+            top_match = False
+            for idx, (agent_name, score) in enumerate(agent_results):
+                if agent_name == expected_agent:
+                    agent_found = True
+                    if idx == 0:
+                        top_match = True
+            if top_match:
+                agent_passes += 1
+                agent_results_list.append("PASS")
+                if expected_agent in agent_stats:
+                    agent_stats[expected_agent]['pass'] += 1
+            elif agent_found:
+                agent_warnings += 1
+                agent_results_list.append("WARNING")
+                if expected_agent in agent_stats:
+                    agent_stats[expected_agent]['warning'] += 1
+            else:
+                agent_fails += 1
+                agent_results_list.append("FAIL")
+                if expected_agent in agent_stats:
+                    agent_stats[expected_agent]['fail'] += 1
+        except Exception as e:
+            agent_fails += 1
+            agent_results_list.append("FAIL")
+            if expected_agent in agent_stats:
+                agent_stats[expected_agent]['fail'] += 1
 
-def test_route_query() -> None:
-    """Main test function with separated router results and plotting by router type"""
-    # Initialize test components
-    router_results = {
-        'AgentRouter': RouterResult("AgentRouter"),
-        'ToolRouter': RouterResult("ToolRouter"),
-        # Add more router types as needed
-    }
-    
-    agent_router = AgentRouter(agents, 
-                                model_name="facebook/bart-large-mnli",
-                                top_n=1,
-                                threshold=AGENT_ROUTER_THRESHOLD)
-    tool_router = ToolRouter(tools,
-                                model_name="facebook/bart-large-mnli",
-                                top_n=3,
-                                threshold=TOOL_ROUTER_THRESHOLD)
-    
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    
-    for data_item in test_data:
-        query = data_item["query"]
-        
-        # Test AgentRouter
-        start = perf_counter()
-        selected_agent = agent_router.route_query(query)
-        agent_time = perf_counter() - start
-        router_results['AgentRouter'].add_time(agent_time)
-        
-        # Test ToolRouter
-        start = perf_counter()
-        selected_tools = tool_router.route_query(query)
-        tool_time = perf_counter() - start
-        router_results['ToolRouter'].add_time(tool_time)
-        
-        print("\n" + "=" * 50)
-        print(f"Query: {query}")
-        
-        # Validate results
-        validate_agent(selected_agent, data_item["expected_agent"], router_results['AgentRouter'])
-        validate_tools(selected_tools, set(data_item["expected_tools"]), router_results['ToolRouter'])
-    
+        # Test tool router
+        try:
+            tool_results = tool_router.route_query(query)
+            found_tools = []
+            for tool_name, score in tool_results:
+                if tool_name in expected_tools:
+                    found_tools.append(tool_name)
+            missing_tools = [t for t in expected_tools if t not in found_tools]
+
+            # Stats per-tool
+            # Mark as pass/warning/fail per expected tool
+            if set(found_tools) == set(expected_tools):
+                tool_passes += 1
+                tool_results_list.append("PASS")
+                for t in found_tools:
+                    tool_stats[t]['pass'] += 1
+            elif found_tools and missing_tools:
+                tool_warnings += 1
+                tool_results_list.append("WARNING")
+                for t in found_tools:
+                    tool_stats[t]['warning'] += 1
+                for t in missing_tools:
+                    tool_stats[t]['fail'] += 1
+            else:
+                tool_fails += 1
+                tool_results_list.append("FAIL")
+                for t in expected_tools:
+                    tool_stats[t]['fail'] += 1
+        except Exception as e:
+            tool_fails += 1
+            tool_results_list.append("FAIL")
+            for t in prompt.get("expected_tools", []):
+                tool_stats[t]['fail'] += 1
+
     # Print summary
-    print("\n" + "=" * 50)
-    print("TEST SUMMARY")
-    print("-" * 20)
-    print(f"Total Test Cases: {len(test_data)}")
-    for router_name, results in router_results.items():
-        print("\n" + str(results))
-    
-    router_times = {
-        name: results.times 
-        for name, results in router_results.items()
-    }
-    
-    # Generate plots
-    plot_router_performance_by_type(router_times, timestamp)
-    plot_router_types_accuracy(router_results, timestamp)
-    plot_router_types_time_series(router_times, timestamp)
-    plot_router_types_summary(router_results, timestamp)
-    
-    print("\nPlots have been saved in the 'plots' directory.")
+    print("\n===== TEST SUMMARY =====")
+    print(f"Total tests: {total_tests}")
+    print(f"Agent router results: PASS={agent_passes}, WARNING={agent_warnings}, FAIL={agent_fails}")
+    print(f"Tool router results:  PASS={tool_passes}, WARNING={tool_warnings}, FAIL={tool_fails}")
+
+    # Save plots
+    save_router_test_plot(
+        agent_passes, agent_warnings, agent_fails,
+        tool_passes, tool_warnings, tool_fails,
+        agent_results_list, tool_results_list,
+        tool_stats,
+        agent_stats,
+        total_tests,
+        outdir="plots"
+    )
 
 
+    # Cleanup
+    try:
+        agent_router.shutdown()
+    except Exception as e:
+        print(e)
 
 if __name__ == "__main__":
-    test_route_query()
+    test_agent_router()

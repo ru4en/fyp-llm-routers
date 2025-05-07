@@ -1,17 +1,19 @@
-## TODO
 
-- [ ] get the library working
- - [ ] genaric router
- - [ ] tool router
- - [ ] agent router
-- [ ] create a demo script
-- [ ] create a test script
- - [ ] synctactic data
-- [ ] create a website ci pipeline
+# Plan
+
+- [x] get the library working
+ - [x] genaric router
+ - [x] tool router
+ - [x] agent router
+- [x] create a demo script
+- [x] create a test script
+ - [x] synctactic data
+- [x] create a website ci pipeline
 - [ ] finetune a model for the agent router
 - [ ] finetune a model for the tool router
-- [ ] create the poster
+- [x] create the poster
 - [ ] create some plots
 - [ ] create the presentation
 - [ ] write the report
 
+## ideas
