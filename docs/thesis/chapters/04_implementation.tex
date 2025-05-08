@@ -147,7 +147,7 @@ python3 src/test/demo.py
 
 \subsection{Synthetic Dataset Generation}
 \label{synthetic dataset generation}
-To validate the routers, I constructed synthetic test datasets. In \texttt{src/test/syn\_data/data.py}, I defined a set of agents (e.g., "Adam" the developer, "Eve" the designer) and tools with descriptions, along with a list of test queries mapping to expected agents and tools. For example, the query \textit{"Write a Python application to track stock prices"} is labelled with agent "Adam" and tools \texttt{["IDE", "Terminal"]}. This synthetic data covers a range of domains such as coding tasks, design tasks, and research tasks. During testing, the router modules are run against these cases to measure correctness (see \texttt{src/test/test.py}). This approach allows systematic evaluation without needing large real world logs. Moreover, generating synthetic queries ensures controlled coverage of edge cases (such as queries that should route to multiple tools or ambiguous cases).
+To validate the routers, I constructed synthetic test datasets. In \texttt{src/test/syn\_data/data.py}, I defined a set of agents ("Adam" the developer, "Eve" the designer etc.) and tools with descriptions, along with a list of test queries mapping to expected agents and tools. For example, the query \textit{"Write a Python application to track stock prices"} is labelled with agent "Adam" and tools \texttt{["IDE", "Terminal"]}. This synthetic data covers a range of domains such as coding tasks, design tasks, and research tasks. During testing, the router modules are run against these cases to measure correctness (see \texttt{src/test/test.py}). This approach allows systematic evaluation without needing large real world logs. Moreover, generating synthetic queries ensures controlled coverage of edge cases (such as queries that should route to multiple tools or ambiguous cases).
 
 \begin{quote}
 \textbf{NOTE:} Synthetic Dataset, which is only used to demonstrate the feasibility of this module, was generated using Chat GPT.
@@ -185,23 +185,23 @@ The three plugins for OpenWebUI:
 
 \begin{itemize}
     \item \textbf{Agent Router Plugin}: Routes arbitrary user queries to one of five specialised AI agents (Email, Code, Summariser, Chatbot, Sentiment Analysis) based on task descriptions.
-    \item \textbf{Tool Router Plugin}: Selects the most appropriate system tool that has already been installed (e.g. web search, code interpreter, image generation) for each incoming user request.
+    \item \textbf{Tool Router Plugin}: Selects the most appropriate system tool that has already been installed (e.g web search, code interpreter, image generation) for each incoming user request.
     \item \textbf{Security Router Plugin}: An additional plugin was also created and tested to see if NLI could be used as a security guardrail.
 \end{itemize}
 
 
 \section{Fine Tuned Model}
 \label{fine tuned model}
-An important component of this project is evaluating whether specialised fine tuning of NLI models can outperform zero shot routing for our four core tasks. We therefore propose to train and compare four distinct fine tuned classifiers:
+An important component of this project is evaluating whether specialised fine tuning of NLI models can outperform zero shot routing for our four core tasks. I therefore propose to train and compare four distinct fine tuned classifiers:
 
 \begin{itemize}
-    \item \textbf{Agent Selection Model}: Discriminates which agent (e.g. developer, designer, researcher) should handle a given prompt.
-    \item \textbf{Tool Selection Model}: Identifies the most appropriate tools for a prompt (e.g. calculator, code executor, web browser).
-    \item \textbf{Security Guardrail Model}: Flags adversarial or out of scope inputs (e.g. prompt injections, disallowed content).
+    \item \textbf{Agent Selection Model}: Discriminates which agent (developer, designer, researcher...) should handle a given prompt.
+    \item \textbf{Tool Selection Model}: Identifies the most appropriate tools for a prompt (calculator, code executor, web browser).
+    \item \textbf{Security Guardrail Model}: Flags adversarial or out of scope inputs prompt injections, disallowed content).
     \item \textbf{Prompt Complexity Model}: Predicts the "difficulty" or resource demands of a prompt, aiding cost quality trade offs.
 \end{itemize}
 
-Each model will share the same base architecture (a BART-large-MNLI backbone) but receive task specific labelled data and classification heads. By fine tuning on dedicated datasets, we expect improved precision and recall over the zero shot NLI approach, particularly for nuanced or emerging patterns not well captured by generic NLI.
+Each model will share the same base architecture (a BART-large-MNLI backbone) but receive task specific labelled data and classification heads. By fine tuning on dedicated datasets, I expect improved precision and recall over the zero shot NLI approach, particularly for nuanced or emerging patterns not well captured by generic NLI.
 
 \subsection{Training Dataset}
 \label{training dataset}
@@ -210,16 +210,16 @@ For the Training Dataset I will assemble and curate several datasets to support 
 \begin{itemize}
     \item \textbf{SoftAge-AI/prompt-eng\_dataset}: Provides a diverse set of real user prompts annotated for topic, complexity, tool usage, and agent role, supporting the Agent, Prompt Complexity, and Tool Selection models.
     \item \textbf{GuardrailsAI/restrict-to-topic}: Offers synthetic, topic restricted conversational examples, ideal for training the Security Guardrail model to detect off topic or forbidden content.
-    \item \textbf{seankski/tool-parameters-v1-1-llama3-70B}: (or a similar parameter mapping dataset) Captures realistic mappings between prompts and tool invocation parameters for enriching the Tool Selection model’s training.
+    \item \textbf{seankski/tool-parameters-v1-1-llama3-70B}: (or a similar parameter mapping dataset) Captures realistic mappings between prompts and tool invocation parameters for enriching the Tool Selection model's training.
 \end{itemize}
 
 \subsection{Data Cleaning}
-During the Data Cleaning for the \texttt{SoftAge-AI/prompt-eng\_dataset} dataset, I loaded the raw data from the Hub using the Hugging Face \texttt{datasets} library’s \texttt{load\_dataset} function, which seamlessly handles JSON and Parquet formats from both local and remote repositories. The dataset contained nested fields where each record comprised a JSON encoded conversation log and a JSON list of tool specifications. I implemented a custom parser to extract the first user utterance and the first tool’s description from each record, handling \texttt{JSONDecodeError}, missing keys, and empty lists robustly. Following extraction, I applied a filter step to remove any rows where parsing failed or returned empty strings. This reduced the raw corpus of approximately 551,285 examples to 441,028 valid training samples and 110,257 test samples, ensuring high quality inputs for downstream tokenisation and model training.
+During the Data Cleaning for the \texttt{SoftAge-AI/prompt-eng\_dataset} dataset, I loaded the raw data from the Hub using the Hugging Face \texttt{datasets} library's \texttt{load\_dataset} function, which seamlessly handles JSON and Parquet formats from both local and remote repositories. The dataset contained nested fields where each record comprised a JSON encoded conversation log and a JSON list of tool specifications. I implemented a custom parser to extract the first user utterance and the first tool's description from each record, handling \texttt{JSONDecodeError}, missing keys, and empty lists robustly. Following extraction, I applied a filter step to remove any rows where parsing failed or returned empty strings. This reduced the raw corpus of approximately 551,285 examples to 441,028 valid training samples and 110,257 test samples, ensuring high quality inputs for downstream tokenisation and model training.
 
 
 
 \subsubsection{4.4.2 Finetuning Process}
-I selected the sequence classification variant of the BART large NLI model (\texttt{facebook/bart-large-mnli}) as our backbone, owing to its strong zero shot and fine tuning performance on sentence pair tasks. The model’s configuration was adapted to the 73 target classes as per the dataset and supplied with corresponding \texttt{id2label} and \texttt{label2id} mappings.
+I selected the sequence classification variant of the BART large NLI model (\texttt{facebook/bart-large-mnli}) as our backbone, owing to its strong zero shot and fine tuning performance on sentence pair tasks. The model's configuration was adapted to the 73 target classes as per the dataset and supplied with corresponding \texttt{id2label} and \texttt{label2id} mappings.
 
 For optimisation, I used the \texttt{Trainer} API, which abstracts the training loop and automates gradient accumulation, checkpointing, and metric logging. Finetuning proceeded for one epoch, yielding stable training loss trajectories below 0.001 by step 1240. The final model was saved locally, and its mapping tables were exported to JSON for deployment.
 
@@ -233,7 +233,7 @@ The system architecture implements an elegant yet powerful two stage cascading r
 
 The Model Router serves as the first decision layer in our system, determining which language model should process the incoming prompt. This critical routing decision is based on multiple factors including the prompt's domain, complexity, and specific requirements. The Model Router can operate in three increasingly sophisticated modes:
 
-\textbf{Mode 1: Cost Performance Optimisation}  
+\textbf{Mode 1: Cost-Performance Optimisation}  
 
 
 \begin{figure}[H]
@@ -273,6 +273,8 @@ In this more advanced configuration, the Model Router selects from an array of d
 
 This approach leverages the strengths of specialised training to deliver superior results in specific domains compared to general purpose models.
 
+\newpage
+
 \textbf{Mode 3: Hybrid Routing with Cascading Filters}
 
 \begin{figure}[H]
@@ -282,26 +284,67 @@ This approach leverages the strengths of specialised training to deliver superio
     \label{fig:hybrid_model_router}
 \end{figure}
 
-The most sophisticated implementation combines the previous approaches into a comprehensive routing strategy. In this configuration, the system:
+A More sophisticated implementation combines the previous approaches into a comprehensive routing strategy. In this configuration, the system:
 
 \begin{enumerate}
-    \item First evaluates the prompt against domain categories to identify specialised knowledge requirements.
-    \item Then assesses complexity factors to determine the appropriate performance tier within that domain.
-    \item Finally selects the optimal model that balances domain expertise with appropriate computational resources.
+    \item \textbf{Domain Identification}: The system first evaluates the prompt against a set of predefined domain categories to determine whether specialised knowledge is required. This ensures that prompts are routed to models with relevant domain expertise when necessary.
+    \item \textbf{Complexity Assessment}: Next, the prompt is analysed for complexity factors such as ambiguity, required reasoning depth, or expected response length to determine the appropriate performance tier within the identified domain.
+    \item \textbf{Model Selection}: Finally, the system selects the optimal language model by consulting a lookup table or database. This table maps domains and complexity tiers to models that best balance domain specific expertise with computational efficiency and resource constraints.
 \end{enumerate}
 
-This hybrid approach gets the best of both worlds by ensuring prompts receive both domain appropriate handling and suitable computational resources.
+This hybrid approach leverages the strengths of both domain aware routing and resource optimisation, ensuring that each prompt is handled based on its content and requirements, while also matching it to models that can deliver high quality results within the available computational resources.
 
-\subsubsection{Tool Router: Extending Model Capabilities Through External Functions}
 
-After the appropriate model has been selected, the Tool Router provides the second layer of intelligence by determining which external tools or knowledge sources should supplement the model's capabilities. The Tool Router:
+To facilitate this process, resources such as a global; Vellum LLM leaderboard\footnote{\url{https://www.vellum.ai/llm-leaderboard}} or the Hugging Face Open LLM Leaderboard\footnote{\url{https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard}} can be consulted. These leaderboards provide comprehensive, up to date benchmarking data on a wide array of language models and can inform model selection by considering multiple variables, such as:
+
+\begin{itemize}
+    \item \textbf{Average Score Across Benchmarks}: Selecting models based on their overall performance across a suite of standard benchmarks.
+    \item \textbf{Instruction-Following Ability (IFEval)}: Prioritising models that excel at following user instructions accurately and coherently.
+    \item \textbf{Big Bench Hard (BBH)}: Evaluating models on a collection of challenging tasks across domains, such as language understanding, mathematical reasoning, and common sense/world knowledge.
+    \item \textbf{Mathematics Aptitude Test of Heuristics (MATH)}: Identifying models with superior mathematical reasoning abilities.
+    \item \textbf{Environmental Impact}: Factoring in models with lower carbon dioxide emissions for greener operations.
+\end{itemize}
+
+In the following subsubsection, I will expand on how such a repository of could be serverd where 
+
+\subsubsection{Advanced Model Routing Using Multiple Variables}
+
+Model routing can be further enhanced by incorporating a multi variable lookup equation, enabling more nuanced and dynamic decision making. For instance, by adopting a hybrid routing strategy with cascading filters (as in Mode 3), the system can sequentially apply filters based on domain, complexity, instruction following capability, benchmark scores, and sustainability metrics. For example, the system could use a weighted scoring system with:
 
 \begin{enumerate}
-    \item Analyses the prompt to identify specific functional requirements that might benefit from specialised tools.
-    \item Selects appropriate external utilities from its available toolset.
-    \item Orchestrates the interaction between the selected model and tools via standardised function calling interfaces.
+    \item \textbf{User's Previous Scoring}: The system can consider the user's historical ratings of models for specific domains, allowing for personalised routing based on past interactions.
+    \item \textbf{Other Users' Scoring}: The system can aggregate ratings from other users to identify models that are generally well received in specific domains.
+    \item \textbf{Average Score Across Benchmarks}: The system can use the average score across various benchmarks to evaluate model performance objectively.
 \end{enumerate}
 
+Furthermore, using a tagging and filtering system, the Model Router can dynamically adjust based on users requirements. For example, if a user priffers a model with a lower carbon footprint, the system can filter out models that do not meet this requirement. This allows for a more tailored and user centric experience, where the Model Router can adapt to individual preferences and priorities. This flexible approach ensures that each prompt is handled by the model most suited to its unique requirements, maximising both performance, resource efficiency and user satisfaction.
+
+
+\[
+\text{Score}_{m,t} = w_1 \cdot s^{\text{user}}_{m,t} + w_2 \cdot \overline{s}^{\text{others}}_{m,t} + w_3 \cdot s^{\text{benchmark}}_{m,t} + w_4 \cdot s^{\text{sustainability}}_{m} \cdot \delta_{\text{sus}}
+\]
+
+\text{where:}
+\begin{align*}
+&\text{Score}_{m,t} \quad\quad = \text{Total weighted score for model } m \text{ on topic } t \\
+&s^{\text{user}}_{m,t} \quad = \text{User's score for model } m \text{ on topic } t \\
+&\overline{s}^{\text{others}}_{m,t} = \text{Average score of other users for model } m \text{ on topic } t \\
+&s^{\text{benchmark}}_{m,t} = \text{Benchmark score for model } m \text{ on topic } t \\
+&s^{\text{sustainability}}_{m} = \text{Sustainability score for model } m \\
+&w_1, w_2, w_3, w_4 = \text{Respective weights for each term} \\
+&\delta_{\text{sus}} =
+  \begin{cases}
+    1 & \text{if user enabled sustainability} \\
+    0 & \text{otherwise}
+  \end{cases}
+\end{align*}
+
+
+
+\noindent
+    \textbf{Interpretation:} \\
+    This equation computes a weighted sum of model quality and preference indicators. Sustainability can be seamlessly included or omitted. The model with the highest score is selected for processing the prompt for that specific topic.
+    
 \subsubsection{Integration and Information Flow}
 
 The complete system operates as a seamless processing pipeline:
@@ -317,17 +360,17 @@ The complete system operates as a seamless processing pipeline:
     \item A comprehensive response is returned to the user.
 \end{enumerate}
 
-This architecture enables sophisticated query handling that dynamically adapts to varying prompt requirements while maintaining system efficiency. By separating model selection from tool selection, the system achieves a high degree of flexibility and extensibility, allowing for independent optimization of each component.
+This architecture enables sophisticated query handling that dynamically adapts to varying prompt requirements while maintaining system efficiency. By separating model selection from tool selection, the system achieves a high degree of flexibility and extensibility, allowing for independent optimisation of each component.
 
-In this script, we set up a simple command line interface that allows users to input prompts and receive routing results. The script uses the \texttt{AgentRouter}, \texttt{ToolRouter}, and \texttt{Router} classes from the \texttt{llm\_routers} library to route the input prompt to the appropriate agents, tools, and complexity levels. The results are printed in a user friendly format.
+In this script, I set up a simple command line interface that allows users to input prompts and receive routing results. The script uses the \texttt{AgentRouter}, \texttt{ToolRouter}, and \texttt{Router} classes from the \texttt{llm\_routers} library to route the input prompt to the appropriate agents, tools, and complexity levels. The results are printed in a user friendly format.
 
-For the demo script, we also added a signal handler to gracefully shut down the routers when the user interrupts the script (e.g., by pressing Ctrl+C). This ensures that any resources used by the routers are properly released.
+For the demo script, I also added a signal handler to gracefully shut down the routers when the user interrupts the script (by pressing ctrl+C). This ensures that any resources used by the routers are properly released.
 
 \subsection{Plugin Integration with Existing Systems}
 
-To demonstrate the practical applicability of the routing system, we integrated the \texttt{llm\_routers} library with an existing AI interface. The integration process involved creating plugins for OpenWebUI, a popular open source web based interface for interacting with large language models.
+To demonstrate the practical applicability of the routing system, I integrated the \texttt{llm\_routers} library with an existing AI interface. The integration process involved creating plugins for OpenWebUI, a popular open source web based interface for interacting with large language models.
 
-OpenWebUI allows users to interact with various AI models and tools through a web interface. It is a platform that supports custom plugins, via the admin panel, enabling developers to extend its functionality by adding new \texttt{functions} and \texttt{tools}. Using the functions system, we can create plugins that route user queries to the appropriate agents and tools based on the routing decisions made by the \texttt{llm\_routers} library.
+OpenWebUI allows users to interact with various AI models and tools through a web interface. It is a platform that supports custom plugins, via the admin panel, enabling developers to extend its functionality by adding new \texttt{functions} and \texttt{tools}. Using the functions system, I can create plugins that route user queries to the appropriate agents and tools based on the routing decisions made by the \texttt{llm\_routers} library.
 
 Creating a plugin for OpenWebUI involves reading the OpenWebUI documentation from \url{https://docs.openwebui.com/pipelines/pipes/} and following the guidelines for plugin development.
 
@@ -366,7 +409,7 @@ The Tool Router plugin is similar to the Model Router plugin, but since the Open
 
 Since the Tool Router plugin is more complex than the Model Router plugin, this plugin used a \texttt{filter} method from OpenWebUI. Where the \texttt{filter} method allows the plugin to modify the user input before and after the inference. The \texttt{inlet} method is called before the user input is sent to the model, and the \texttt{outlet} method is called after the model output is received. This allows the plugin to modify the user input and model output before and after the inference.
 
-Since we need to select the tool before the user input is sent to the model, we used the \texttt{inlet} method to route the user input to the appropriate tools. Here we used the \texttt{ToolRouter} class to route the user input to the appropriate tools.
+Since I need to select the tool before the user input is sent to the model, I used the \texttt{inlet} method to route the user input to the appropriate tools. Here I used the \texttt{ToolRouter} class to route the user input to the appropriate tools.
 
 Within this plugin, I also got the chance to work with other APIs that OpenWebUI provides. For example, the \texttt{EventEmitter} API allows the plugin to show a message in the OpenWebUI interface. This was used to show the user which tools were selected for the user input.
 
@@ -396,4 +439,4 @@ Within this plugin, I also got the chance to work with other APIs that OpenWebUI
 
 Similar to the Model Router, this too uses the \texttt{Pipe} class and the \texttt{pipe} method to route the user input to the appropriate security guardrail.
 
-Since the security guardrail is a simple text classification task, we used the \texttt{Router} class from the \texttt{llm\_routers} library to categorise the user input into either \texttt{prompt injection}, \texttt{Data Leakage}, \texttt{Model Evasion}, \texttt{Adversarial Examples}, \texttt{Malicious Code}, or \texttt{Malicious Query}. The plugin then returns a debug like message with the selected type of attack and the confidence score. Since this is a rather complex task, the plugin is not very accurate and is not recommended for use. Although the plugin can be extended to use a more complex model or by using a fine tuned model as described in the previous section.
+Since the security guardrail is a simple text classification task, I used the \texttt{Router} class from the \texttt{llm\_routers} library to categorise the user input into either \texttt{prompt injection}, \texttt{Data Leakage}, \texttt{Model Evasion}, \texttt{Adversarial Examples}, \texttt{Malicious Code}, or \texttt{Malicious Query}. The plugin then returns a debug like message with the selected type of attack and the confidence score. Since this is a rather complex task, the plugin is not very accurate and is not recommended for use. Although the plugin can be extended to use a more complex model or by using a fine tuned model as described in the previous section.

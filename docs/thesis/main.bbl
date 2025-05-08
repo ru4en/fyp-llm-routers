@@ -1,5 +1,12 @@
 \begin{thebibliography}{xx}
 
+\harvarditem[Bender et~al.]{Bender, Gebru, McMillan-Major \harvardand\
+  Shmitchell}{2021}{bender2021dangers}
+Bender, E.~M., Gebru, T., McMillan-Major, A. \harvardand\ Shmitchell, S.
+  \harvardyearleft 2021\harvardyearright , `On the dangers of stochastic
+  parrots: Can language models be too big?', {\em Proceedings of the 2021 ACM
+  Conference on Fairness, Accountability, and Transparency} pp.~610--623.
+
 \harvarditem[Hu et~al.]{Hu, Bieker, Li, Jiang, Keigwin, Ranganath, Keutzer
   \harvardand\ Upadhyay}{2024}{hu2024routerbenchbenchmarkmultillmrouting}
 Hu, Q.~J., Bieker, J., Li, X., Jiang, N., Keigwin, B., Ranganath, G., Keutzer,
@@ -36,6 +43,13 @@ Schick, T., Dwivedi-Yu, J., Dessì, R., Raileanu, R., Lomeli, M., Zettlemoyer,
   2023\harvardyearright , `Toolformer: Language models can teach themselves to
   use tools'.
 \newline\harvardurl{https://arxiv.org/abs/2302.04761}
+
+\harvarditem[Strubell et~al.]{Strubell, Ganesh \harvardand\
+  McCallum}{2019}{strubell2019energypolicyconsiderationsdeep}
+Strubell, E., Ganesh, A. \harvardand\ McCallum, A.  \harvardyearleft
+  2019\harvardyearright , `Energy and policy considerations for deep learning
+  in nlp'.
+\newline\harvardurl{https://arxiv.org/abs/1906.02243}
 
 \harvarditem[Varangot-Reille et~al.]{Varangot-Reille, Bouvard, Gourru,
   Ciancone, Schaeffer \harvardand\

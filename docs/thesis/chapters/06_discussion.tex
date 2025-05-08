@@ -1,2 +1,39 @@
-\chapter{Discussion and Analysis}
-\label{ch:evaluation}
+\chapter{Discussion}
+\label{ch:discussion}
+
+\section{Ethical Considerations}
+\label{sec:discussion-ethical-considerations}
+
+% Talk about the ethical implications of using LLMs and the potential for spreading misinformation.
+
+With LLMs being increasingly integrated into all aspects of our lives, it is crucial to consider the ethical implications of their use. This raises several important questions, 
+such as: 
+
+\begin{itemize}
+    \item How do we ensure that LLMs are used responsibly and ethically?
+    \item What are the potential consequences of using LLMs in sensitive areas such as healthcare, finance, and education?
+    \item Its impact on the environment?
+    \item The implications of using non open weights models or proprietary models that are only accessible through APIs?
+\end{itemize}
+
+Although Routers are a set of tools that tries to improve the efficiency of LLMs and make them more context aware it is important to consider the ethical implications of LLMs and build tools such as Router that can help mitigate some of problems associated with LLMs.
+
+\subsection{Social Implications of of LLMs}
+\label{sec:discussion-social-implications-of-llms}
+
+One major concern is the potential for LLMs to spread misinformation. As these models are trained on vast amounts of data from the internet, they may inadvertently learn and propagate false or misleading information. This can have serious consequences, especially in areas such as healthcare, politics, and social issues, where accurate information is critical \citep{strubell2019energypolicyconsiderationsdeep}.
+
+Hallucination is another significant issue associated with LLMs spurning false information. This phenomenon occurs when a model generates text that is factually incorrect or nonsensical, leading to confusion and misinformation \citep{bender2021dangers}. Using Routers can potentially help mitigate this issue by directing queries to the most appropriate model or tool, reducing the likelihood of routing a complex query to a model that may not be able to handle it effectively. For example, if a user asks a complex question about a medical condition, the Router can direct the query to a specialised medical model or tool rather than a general-purpose LLM. This can help ensure that users receive accurate and relevant information while also reducing the risk of hallucination. Adding an extra layer of safety such as a NLI based Security Guard that can help identify and filter out potentially harmful or misleading content.
+
+\subsection{Empact of LLMs on the Environment}
+\label{sec:discussion-impact-of-llms-on-the-environment}
+
+With large and complex models like GPT-4 and Claude 3, the environmental impact of LLMs is a growing concern. According to a study by \citep{strubell2019energypolicyconsiderationsdeep}, the energy consumption associated with training a single LLM can be equivalent to the lifetime emissions of five cars. The energy consumption associated with not only training these models but also running them for inference can be significant. This raises questions about the sustainability of using LLMs in various applications, especially when considering the carbon footprint associated with their operation. Routers have shown to be effective in reducing the number of tokens needed for a given task, which can help reduce the overall energy consumption associated with running LLMs. By directing queries to the most appropriate model or tool, Routers can help ensure that users receive accurate and relevant information while also reducing the energy consumption associated with running LLMs.
+
+\subsection{Impact of closed weights and sensored models}
+\label{sec:discussion-impact-of-closed-weights-and-sensored-models}
+
+The use of closed weighted or proprietary models that are only accessible through APIs raises several privacy and national security concerns. These models may be subject to restrictions on what content they can generate or how they can be used, which can limit researchers ability to study and understand their behaviour. 
+
+For example, the online version of deepDeepSeek R1 is censor to avoid certain topics such as the Tiananmen Square protests\footnote{https://www.independent.co.uk/tech/deepseek-china-questions-refuse-beijing-b2687605.html}, the model actively avoids generating content related to this topic even though it fully understands the context of the question as shown in its thinking porcess when self hosted\footnote{https://dev.to/jeramos/deepseek-model-does-not-censor-tiananmen-square-2kcb}. This lack of transparency can hinder efforts to ensure that these models are used responsibly and ethically. Additionally, the reliance on proprietary models can create barriers. Here, the use of Routers can help redirect sensitive queries to self hosted models or tools, reducing the reliance on proprietary APIs and ensuring that users have more control over their data and the models they use. This can help mitigate some of the ethical concerns associated with using non-open weights models.
+
