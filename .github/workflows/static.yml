@@ -31,7 +31,7 @@ jobs:
           pdflatex -interaction=nonstopmode main.tex
           mkdir -p ../../dist
           cp main.pdf ../../dist/thesis.pdf
-          cp figures/* ../../dist
+          cp figures/* ../../dist -r
       - name: Upload thesis artifact
         uses: actions/upload-artifact@v4
         with:
