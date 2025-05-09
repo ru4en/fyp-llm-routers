@@ -1011,6 +1011,11 @@ INPUT ./chapters/01_introduction.tex
 INPUT chapters/01_introduction.tex
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmssbx10.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmssbx10.tfm
+INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
+INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
+INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
+INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
+INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmtti10.tfm
 INPUT ./chapters/02_literature.tex
 INPUT ./chapters/02_literature.tex
 INPUT ./chapters/02_literature.tex
@@ -1018,10 +1023,6 @@ INPUT chapters/02_literature.tex
 INPUT ./chapters/02_literature.tex
 INPUT ./chapters/02_literature.tex
 INPUT chapters/02_literature.tex
-INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
-INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
-INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
-INPUT /usr/share/texmf/tex/latex/lm/t1lmtt.fd
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmtt10.tfm
 INPUT ./chapters/03_methodology.tex
 INPUT ./chapters/03_methodology.tex
@@ -1217,3 +1218,4 @@ INPUT /usr/share/texmf/fonts/type1/public/lm/lmsso12.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmsso8.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb
+INPUT /usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb

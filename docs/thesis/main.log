@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.11.11)  9 MAY 2025 06:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2024.11.11)  9 MAY 2025 07:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -716,15 +716,15 @@ Chapter 1.
 [1
 
 
-] [2] [3]) (./chapters/02_literature.tex [4]
+] [2] [3]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 85.
+ (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)) (./chapters/02_literature.tex [4]
 Chapter 2.
 [5
 
 ]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 25.
- (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
 
 Package natbib Warning: Citation `https://aws.amazon.com/blogs/machine-learning/multi-llm-routing-strategies-for-generative-ai-applications-on-aws/' on page 6 undefined on input line 25.
 
@@ -733,36 +733,36 @@ Chapter 3.
 [9
 
 ] [10]
-<figures/seq-digram.drawio.png, id=553, 1168.365pt x 623.32875pt>
+<figures/seq-digram.drawio.png, id=555, 1168.365pt x 623.32875pt>
 File: figures/seq-digram.drawio.png Graphic file (type png)
 <use figures/seq-digram.drawio.png>
 Package pdftex.def Info: figures/seq-digram.drawio.png  used on input line 66.
 (pdftex.def)             Requested size: 424.06033pt x 226.23384pt.
  [11 <./figures/seq-digram.drawio.png>]
-<figures/model-router.png, id=560, 896.34875pt x 645.41125pt>
+<figures/model-router.png, id=562, 896.34875pt x 645.41125pt>
 File: figures/model-router.png Graphic file (type png)
 <use figures/model-router.png>
 Package pdftex.def Info: figures/model-router.png  used on input line 88.
 (pdftex.def)             Requested size: 424.06033pt x 305.34251pt.
  [12 <./figures/model-router.png>]
-<figures/model-router.drawio.png, id=569, 671.50874pt x 348.30125pt>
+<figures/model-router.drawio.png, id=571, 671.50874pt x 348.30125pt>
 File: figures/model-router.drawio.png Graphic file (type png)
 <use figures/model-router.drawio.png>
 Package pdftex.def Info: figures/model-router.drawio.png  used on input line 129.
 (pdftex.def)             Requested size: 212.03017pt x 109.97589pt.
-<figures/hybrid-agent-router.drawio.png, id=570, 482.80376pt x 581.17125pt>
+<figures/hybrid-agent-router.drawio.png, id=572, 482.80376pt x 581.17125pt>
 File: figures/hybrid-agent-router.drawio.png Graphic file (type png)
 <use figures/hybrid-agent-router.drawio.png>
 Package pdftex.def Info: figures/hybrid-agent-router.drawio.png  used on input line 138.
 (pdftex.def)             Requested size: 212.03017pt x 255.2284pt.
  [13 <./figures/model-router.drawio.png> <./figures/hybrid-agent-router.drawio.png>]
-<figures/user-dig.drawio.png, id=578, 733.74126pt x 242.9075pt>
+<figures/user-dig.drawio.png, id=580, 733.74126pt x 242.9075pt>
 File: figures/user-dig.drawio.png Graphic file (type png)
 <use figures/user-dig.drawio.png>
 Package pdftex.def Info: figures/user-dig.drawio.png  used on input line 155.
 (pdftex.def)             Requested size: 296.84093pt x 98.2695pt.
  [14 <./figures/user-dig.drawio.png>] [15]
-<figures/security-router.png, id=613, 486.81876pt x 487.8225pt>
+<figures/security-router.png, id=615, 486.81876pt x 487.8225pt>
 File: figures/security-router.png Graphic file (type png)
 <use figures/security-router.png>
 Package pdftex.def Info: figures/security-router.png  used on input line 240.
@@ -776,7 +776,7 @@ Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on in
  [18
 
 ]
-<figures/UML.png, id=653, 739.76375pt x 835.12pt>
+<figures/UML.png, id=655, 739.76375pt x 835.12pt>
 File: figures/UML.png Graphic file (type png)
 <use figures/UML.png>
 Package pdftex.def Info: figures/UML.png  used on input line 74.
@@ -802,34 +802,34 @@ Overfull \hbox (3.24426pt too wide) in paragraph at lines 221--222
  []
 
 [23] [24]
-<figures/owui-agent-demo-0.png, id=718, 693.34032pt x 342.5297pt>
+<figures/owui-agent-demo-0.png, id=720, 693.34032pt x 342.5297pt>
 File: figures/owui-agent-demo-0.png Graphic file (type png)
 <use figures/owui-agent-demo-0.png>
 Package pdftex.def Info: figures/owui-agent-demo-0.png  used on input line 250.
 (pdftex.def)             Requested size: 381.6517pt x 188.5487pt.
-<figures/owui-agent-demo-1.png, id=719, 724.20563pt x 307.1475pt>
+<figures/owui-agent-demo-1.png, id=721, 724.20563pt x 307.1475pt>
 File: figures/owui-agent-demo-1.png Graphic file (type png)
 <use figures/owui-agent-demo-1.png>
 Package pdftex.def Info: figures/owui-agent-demo-1.png  used on input line 257.
 (pdftex.def)             Requested size: 381.6517pt x 161.86412pt.
-<figures/owui-agent-demo-2.png, id=720, 676.02562pt x 321.45094pt>
+<figures/owui-agent-demo-2.png, id=722, 676.02562pt x 321.45094pt>
 File: figures/owui-agent-demo-2.png Graphic file (type png)
 <use figures/owui-agent-demo-2.png>
 Package pdftex.def Info: figures/owui-agent-demo-2.png  used on input line 264.
 (pdftex.def)             Requested size: 381.6517pt x 181.47787pt.
  [25 <./figures/owui-agent-demo-0.png> <./figures/owui-agent-demo-1.png>]
-<figures/owui-tool-demo-0.png, id=727, 770.88pt x 364.36125pt>
+<figures/owui-tool-demo-0.png, id=729, 770.88pt x 364.36125pt>
 File: figures/owui-tool-demo-0.png Graphic file (type png)
 <use figures/owui-tool-demo-0.png>
 Package pdftex.def Info: figures/owui-tool-demo-0.png  used on input line 283.
 (pdftex.def)             Requested size: 381.6517pt x 180.38994pt.
  [26 <./figures/owui-agent-demo-2.png>]
-<figures/owui-tool-demo-1.png, id=734, 799.48688pt x 408.02437pt>
+<figures/owui-tool-demo-1.png, id=736, 799.48688pt x 408.02437pt>
 File: figures/owui-tool-demo-1.png Graphic file (type png)
 <use figures/owui-tool-demo-1.png>
 Package pdftex.def Info: figures/owui-tool-demo-1.png  used on input line 290.
 (pdftex.def)             Requested size: 381.6517pt x 194.77861pt.
-<figures/owui-tool-demo-2.png, id=735, 588.69937pt x 544.28343pt>
+<figures/owui-tool-demo-2.png, id=737, 588.69937pt x 544.28343pt>
 File: figures/owui-tool-demo-2.png Graphic file (type png)
 <use figures/owui-tool-demo-2.png>
 Package pdftex.def Info: figures/owui-tool-demo-2.png  used on input line 297.
@@ -844,17 +844,17 @@ Chapter 5.
 [29
 
 ]
-<figures/plots/router_test_summary.png, id=754, 867.24pt x 433.62pt>
+<figures/plots/router_test_summary.png, id=756, 867.24pt x 433.62pt>
 File: figures/plots/router_test_summary.png Graphic file (type png)
 <use figures/plots/router_test_summary.png>
 Package pdftex.def Info: figures/plots/router_test_summary.png  used on input line 39.
 (pdftex.def)             Requested size: 339.24956pt x 169.6272pt.
-<figures/plots/agent_routing_per_agent.png, id=755, 578.16pt x 433.62pt>
+<figures/plots/agent_routing_per_agent.png, id=757, 578.16pt x 433.62pt>
 File: figures/plots/agent_routing_per_agent.png Graphic file (type png)
 <use figures/plots/agent_routing_per_agent.png>
 Package pdftex.def Info: figures/plots/agent_routing_per_agent.png  used on input line 48.
 (pdftex.def)             Requested size: 339.24956pt x 254.4375pt.
-<figures/plots/tool_routing_per_tool.png, id=756, 578.16pt x 433.62pt>
+<figures/plots/tool_routing_per_tool.png, id=758, 578.16pt x 433.62pt>
 File: figures/plots/tool_routing_per_tool.png Graphic file (type png)
 <use figures/plots/tool_routing_per_tool.png>
 Package pdftex.def Info: figures/plots/tool_routing_per_tool.png  used on input line 55.
@@ -904,18 +904,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 4CA3A58AC64E5614B4F89BD8DC992805;12258.
  ) 
 Here is how much of TeX's memory you used:
- 19054 strings out of 476091
- 317679 string characters out of 5794080
+ 19056 strings out of 476091
+ 317707 string characters out of 5794080
  2005330 words of memory out of 5000000
- 38845 multiletter control sequences out of 15000+600000
- 651441 words of font info for 114 fonts, out of 8000000 for 9000
+ 38846 multiletter control sequences out of 15000+600000
+ 651760 words of font info for 115 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  90i,16n,91p,1991b,1370s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss12.pfb></usr/share/texmf/fonts/type1/public/lm/lmss17.pfb></usr/share/texmf/fonts/type1/public/lm/lmss8.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb>
-Output written on main.pdf (51 pages, 946986 bytes).
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss10.pfb></usr/share/texmf/fonts/type1/public/lm/lmss12.pfb></usr/share/texmf/fonts/type1/public/lm/lmss17.pfb></usr/share/texmf/fonts/type1/public/lm/lmss8.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsso8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb></usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb>
+Output written on main.pdf (51 pages, 962996 bytes).
 PDF statistics:
- 943 PDF objects out of 1000 (max. 8388607)
- 817 compressed objects within 9 object streams
+ 949 PDF objects out of 1000 (max. 8388607)
+ 821 compressed objects within 9 object streams
  248 named destinations out of 1000 (max. 500000)
  622 words of extra memory for PDF output out of 10000 (max. 10000000)
 
