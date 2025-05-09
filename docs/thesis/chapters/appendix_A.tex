@@ -1,2 +1,54 @@
-\chapter{An Appendix Chapter (Optional)}
+\chapter{Appendix}
 \label{appn:A}
+
+\section{Jupyter Notebook for Fine-Tuning}
+\label{sec:jupyter-notebook-for-fine-tuning}
+\vspace{-0.5em}
+{\small
+The Jupyter notebook for fine-tuning is in \texttt{figures/training-jpytr-nb.pdf} and the original notebook is at \texttt{src/train/router-llm\_train.ipynb}.
+}
+
+\section{Fine-Tuned Models}
+\label{sec:fine-tuning-models}
+\vspace{-0.5em}
+{\small
+Models are on Hugging Face: \url{https://huggingface.co/ru4en}
+\begin{itemize}[nosep]
+    \item \texttt{ru4en/bart-large-mnli-tool-router-new}
+    \item \texttt{ru4en/bart-large-mnli-tool-router}
+    \item \texttt{ru4en/bart-large-mnli-agent-router}
+\end{itemize}
+}
+
+\section{Router Evaluation}
+\label{sec:router-evaluation}
+\vspace{-0.5em}
+{\small
+Test outputs in the repo:
+\begin{itemize}[nosep]
+    \item Plots: \texttt{plots}
+    \item Script: \texttt{src/test/test.py}
+    \item Results: \texttt{src/test/output}
+\end{itemize}
+}
+
+\section{Demonstration of the Router}
+\label{sec:router-demonstration}
+\vspace{-0.5em}
+{\small
+Demo: \texttt{src/test/demo.py}
+}
+
+\section{Router Library}
+\label{sec:router-library}
+\vspace{-0.5em}
+{\small
+GitHub: \url{https://github.com/ru4en/llm_routers}
+
+Install with:
+\begin{verbatim}
+pip install git+https://github.com/ru4en/llm_routers
+\end{verbatim}
+
+Docs: see the repo README or \url{https://fyp.rubenlopes.uk}
+}

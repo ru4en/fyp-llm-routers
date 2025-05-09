@@ -1,0 +1,36 @@
+\chapter{Discussion}
+\label{ch:discussion}
+
+
+\section{Summary of Findings}
+\label{sec:summary-of-findings}
+
+The results of the evaluation indicate that the Router library is effective in selecting the appropriate agent or tool for a given task. Although it significantly depends on how much context is provided. The tool router outperformed the agent router, this was prodominantly due to the fact that the prompts \textit{hinted} at the tool to be used. The agent router was less effective, this could be improve implement the suggestions made in the previous section. Fine-tuning the model on a dataset specifically designed for routing tasks to a specific topic and asigning the topic to the agent could be one way to improve the performance of the agent router, Although much tinkering is needed to improve this.
+
+
+\section{Evaluation of the Router}
+\label{sec:evaluation-of-the-router}
+
+
+The Router library remains a promising tool for routing tasks, whilst still in its early stages of development. The results of the evaluation indicate that the Router library is effective in selecting the appropriate agent or tool. One of the key strengths of the Router library is its since Its build on top of the Hugging Face Transformers library, we can extend the library to support a different range of models and architectures.
+
+One downside of the Router library is that it is not yet ready for production use. The library lacks extensive documentation and examples, which makes it difficult for users to understand how to use it effectively.
+
+Quality assurance is another area that needs improvement. The library currently has no automated tests or benchmarks, which makes it difficult to recommend it for production use. Adding automated tests and benchmarks would help ensure that the library is reliable and robust.
+
+
+\section{Critical Analysis of the Results}
+\label{sec:results-critical-analysis}
+
+This research has shown that NLI is a useful approach for routing tasks, but there are several areas for improvement and questions that need to be addressed. As discussed in the previously, successfully fine tuning the models specifically for routing tasks could significantly improve the performance of the router. Another area of improvement is to explore the use of few-shot or reinforcement learning to refine the router's decision making on the fly. This could help the router adapt to new tasks and improve its performance over time.
+
+\subsection{Flaws in synthetic prompt generation}
+\label{sec:results-flaws-in-synthetic-prompt-generation}
+
+The synthetic prompt generation although at the beginning of the project was a good idea, it was not the best approach to evaluate the router. The prompts were not realistic and did not reflect the complexity of real-world tasks. This limited the effectiveness of the evaluation and made it difficult to draw meaningful conclusions about the router's performance. Future work should focus on collecting genuine user queries and tracking router decisions to uncover blind spots. My one suggestion would be to use something like the \texttt{OpenWebUIs} rating system to collect real user queries and track router decisions. This would provide a more realistic evaluation of the router's performance and help identify areas for improvement.
+
+
+\subsection{Limitations in Model Fine tuning Approach}
+\label{sec:results-limitations-in-model-fine-tuning-approach}
+
+The fine tuning approach used in this research was limited by the availability of high quality datasets for routing tasks. The lack of large, annotated datasets made it challenging to train the models effectively. Additionally, the lack of adequate computational resources limited the ability to experiment with different model architectures and training strategies. Future work should focus on developing larger, more diverse datasets for routing tasks and exploring more advanced model architectures and training techniques.

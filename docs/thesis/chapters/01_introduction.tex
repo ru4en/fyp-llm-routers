@@ -1,7 +1,7 @@
 \chapter{Introduction}
 \label{ch:into}
 
-In the past few years the landscape of large language models has expanded dramatically, with many domain specific as well as general purpose agents emerging across domains such as healthcare (like Med-PaLM 2 and BioGPT), coding (like CodeLlama and GitHub Copilot), and research (like Claude Opus and GPT 4o). Organisations that provide inference as a service now face complex trade offs between cost, latency, and capability; for example, GPT 4.5 can cost up to \$75 per million tokens compared with just \$0.15 for gemini 2.5 flash\footnote{\url{https://sanand0.github.io/llmpricing/}}. Although these models could be vastly different in terms of capability, the problem organisations face is determining \textit{when} to deploy premium models versus more cost effective alternatives for a given task / prompt. This suggests a need for intelligent routing systems that can analyse incoming prompts and direct them to the most appropriate model based on task complexity, required capabilities, and cost considerations\footnote{\url{https://artificialanalysis.ai/}}.
+In the past few years the landscape of large language models has expanded dramatically, with many domain specific as well as general purpose agents emerging across domains such as healthcare (like Med-PaLM 2 and BioGPT), coding (like CodeLlama and GitHub Copilot), and research (like Claude Opus and GPT 4o). Organisations that provide inference as a service now face complex trade offs between cost, latency, and capability; for example, GPT 4.5 can cost up to \$75 per million tokens compared with just \$0.15 for gemini 2.5 flash \citep{llmpricing}. Although these models could be vastly different in terms of capability, the problem organisations face is determining \textit{when} to deploy premium models versus more cost effective alternatives for a given task or prompt. This suggests a need for intelligent routing systems that can analyse incoming prompts and direct them to the most appropriate model based on task complexity, required capabilities, and cost considerations \citep{artificialanalysis}.
 
 Inspired by lower level (transformer embedded) "router" such as the one employed by mistral for their Mixtral (MoE) model the goal of this was to allow for a more distributed, higher level prompt based routing between a verity of models with varying levels of cost and complexity.
 
@@ -12,7 +12,7 @@ Inspired by lower level (transformer embedded) "router" such as the one employed
 
 The proliferation of large language models has created a complex ecosystem where selecting the optimal model for a given task has become increasingly challenging.
 
-Existing multi agent routing systems reveal several shortcomings. First, many current routers rely on \textbf{manual configuration}. For example, Both Open AI's as well as Open WebUI's chat interface require explicitly toggling of tools/selection of agents from users, and listing models to use or skip, on a per chat basis. Second, LLM based routers can suffer from reasoning \textbf{inefficiencies}. Recent studies identify \textit{"underthinking"} (prematurely abandoning good reasoning paths) and \textit{"overthinking"} (generating excessive, unnecessary steps) in modern LLMs. For instance, in a study \cite{wang2025thoughtsplaceunderthinkingo1like}, the authors find that top reasoning models often switch thoughts too quickly – an \textit{"underthinking"} effect that hurts accuracy. Conversely, Kumar \textit{et al.} demonstrate how even simple queries can be made to "overthink" (spending many tokens on irrelevant chains of thought) without improving answers \cite{kumar2025overthinkslowdownattacksreasoning}. \textit{Overthinking} is particularly problematic in the context of function calling, where excessive reasoning can lead to unnecessary API calls and increased costs or worse, hallucinations. This is especially relevant for models like GPT 4o and Claude 3 Opus, which are designed to handle complex reasoning tasks but can rack up significant costs if not used sparingly. The recent introduction of function calling in LLMs has further complicated this landscape, as users must now navigate a myriad of specialised tools and functions. This complexity can lead to inefficient routing decisions, where users may inadvertently select more expensive or less suitable models for their tasks. Finally, prompt interpretation remains imperfect: ambiguous or poorly phrased queries may be misrouted or require multiple LLM calls to resolve intent, leading to inefficiency.
+Existing multi agent routing systems reveal several shortcomings. First, many current routers rely on \textbf{manual configuration}. For example, Both Open AI's as well as Open WebUI's chat interface require explicitly toggling of tools/selection of agents from users, and listing models to use or skip, on a per chat basis. Second, LLM based routers can suffer from reasoning \textbf{inefficiencies}. Recent studies identify \textit{"underthinking"} (prematurely abandoning good reasoning paths) and \textit{"overthinking"} (generating excessive, unnecessary steps) in modern LLMs. For instance, in a study \cite{wang2025thoughtsplaceunderthinkingo1like}, the authors find that top reasoning models often switch thoughts too quickly an \textit{"underthinking"} effect that hurts accuracy. Conversely, \cite{kumar2025overthinkslowdownattacksreasoning} demonstrate how even simple queries can be made to "overthink" (spending many tokens on irrelevant chains of thought) without improving answers . \textit{Overthinking} is particularly problematic in the context of function calling, where excessive reasoning can lead to unnecessary API calls and increased costs or worse, hallucinations. This is especially relevant for models like GPT 4o and Claude 3 Opus, which are designed to handle complex reasoning tasks but can rack up significant costs if not used sparingly. The recent introduction of function calling in LLMs has further complicated this landscape, as users must now navigate a myriad of specialised tools and functions. This complexity can lead to inefficient routing decisions, where users may inadvertently select more expensive or less suitable models for their tasks. Finally, prompt interpretation remains imperfect: ambiguous or poorly phrased queries may be misrouted or require multiple LLM calls to resolve intent, leading to inefficiency.
 
 Organisations and users face several key problems:
 \begin{enumerate}
@@ -27,16 +27,56 @@ Organisations and users face several key problems:
 \section{Research Objectives}
 \label{sec:intro_aims_obj}
 
-The premise of this research is to investigate whether pre existing Natural Language Inference models such as Facebook's bart-large-mnli could be used as drop in replacements to perform automated model selection and tool selection and potentially even using it as a security mechanism to detect adversarial prompts. Furthermore, we will examine the effectiveness of finetuning existing NLI models with specialised datasets designed for routing tasks.
+The premise of this research is to investigate whether pre existing Natural Language Inference models such as Facebook's bart-large-mnli could be used as drop in replacements to perform automated model selection and tool selection and potentially even using it as a security mechanism to detect adversarial prompts. Furthermore, I will examine the effectiveness of finetuning existing NLI models with specialised datasets designed for routing tasks.
 
 The specific research objectives include:
 \begin{itemize}
     \item Creating a LLM Router library that can be deploy to existing systems with ease.
     \item Experimenting with Pretrained NLI models such as bart-large-mnli for both tool routing and model selection.
-    \item Fine-tuning the NLI model with existing datasets to improve its performance.
+    \item Fine tuning the NLI model with existing datasets to improve its performance.
     \item Evaluating and assessing the accuracy the effectiveness using a set of prompts.
     \item Incorporate it with an existing Chatbot UI platform such as OpenWebUI.
 \end{itemize}
 
 
 \textbf{Natural Language Inference (NLI)} is a subfield of Natural Language Processing (NLP) that focuses on determining the relationship between sets of sentences. This is essential for what we are trying to achieve, buy using the prompt as the premise and the model descriptions as the hypothesis. By leveraging NLI techniques, we can create a more efficient and effective routing system that can automatically select the most appropriate model or tool for a given task.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Ethical Considerations}
+\label{sec:discussion-ethical-considerations}
+
+% Talk about the ethical implications of using LLMs and the potential for spreading misinformation.
+
+With LLMs being increasingly integrated into all aspects of our lives, it is crucial to consider the ethical implications of their use. This raises several important questions, 
+such as: 
+
+\begin{itemize}
+    \item How do we ensure that LLMs are used responsibly and ethically?
+    \item What are the potential consequences of using LLMs in sensitive areas such as healthcare, finance, and education?
+    \item Its impact on the environment?
+    \item The privacy and security implications of using non open weights models or proprietary models that are only accessible through APIs?
+\end{itemize}
+
+Although Routers are a set of tools that tries to improve the efficiency of LLMs and make them more context aware it is important to consider the ethical implications of LLMs and build tools such as Router that can help mitigate some of problems associated with LLMs.
+
+\subsection{Social Implications of of LLMs}
+\label{sec:discussion-social-implications-of-llms}
+
+One major concern is the potential for LLMs to spread misinformation. As these models are trained on vast amounts of data from the internet, they may inadvertently learn and propagate false or misleading information. This can have serious consequences, especially in areas such as healthcare, politics, and social issues, where accurate information is critical \citep{strubell2019energypolicyconsiderationsdeep}.
+
+Hallucination is another significant issue associated with LLMs spurning false information. This phenomenon occurs when a model generates text that is factually incorrect or nonsensical, leading to confusion and misinformation \citep{bender2021dangers}. Using Routers can potentially help mitigate this issue by directing queries to the most appropriate model or tool, reducing the likelihood of routing a complex query to a model that may not be able to handle it effectively. For example, if a user asks a complex question about a medical condition, the Router can direct the query to a specialised medical model or tool rather than a general purpose LLM. This can help ensure that users receive accurate and relevant information while also reducing the risk of hallucination. Adding an extra layer of safety such as a NLI based Security Guard that can help identify and filter out potentially harmful or misleading content.
+
+\subsection{Empact of LLMs on the Environment}
+\label{sec:discussion-impact-of-llms-on-the-environment}
+
+With large and complex models like GPT 4 and Claude 3, the environmental impact of LLMs is a growing concern. According to a study by \citep{strubell2019energypolicyconsiderationsdeep}, the energy consumption associated with training a single LLM can be equivalent to the lifetime emissions of five cars. The energy consumption associated with not only training these models but also running them for inference can be significant. This raises questions about the sustainability of using LLMs in various applications, especially when considering the carbon footprint associated with their operation. Routers have shown to be effective in reducing the number of tokens needed for a given task, which can help reduce the overall energy consumption associated with running LLMs. By directing queries to the most appropriate model or tool, Routers can help ensure that users receive accurate and relevant information while also reducing the energy consumption associated with running LLMs.
+
+\subsection{Impact of closed weights and sensored models}
+\label{sec:discussion-impact-of-closed-weights-and-sensored-models}
+
+The use of closed weighted or proprietary models that are only accessible through APIs raises several privacy and national security concerns. These models may be subject to restrictions on what content they can generate or how they can be used, which can limit researchers ability to study and understand their behaviour. 
+
+For example, the online version of deepDeepSeek R1 is censor to avoid certain topics such as the Tiananmen Square protests \citep{independent-deepseek}, the model actively avoids generating content related to this topic even though it fully understands the context of the question as shown in its thinking porcess when self hosted\citep{jeramos-deepseek}. This lack of transparency can hinder efforts to ensure that these models are used responsibly and ethically. Additionally, the reliance on proprietary models can create barriers. Here, the use of Routers can help redirect sensitive queries to self hosted models or tools, reducing the reliance on proprietary APIs and ensuring that users have more control over their data and the models they use. This can help mitigate some of the ethical concerns associated with using closed weighted models and ensure that users have more control over their data and the models they use.
+

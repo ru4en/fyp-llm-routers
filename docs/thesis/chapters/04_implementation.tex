@@ -31,7 +31,8 @@ agent_router
 
 Whilst prototyping the router, I used a simple dictionary to define the topics and their descriptions. Initially, Router was designed with no error handling or logging, and it was not modular. It was simply a wrapper around the \texttt{pipeline} function to demo a proof of concept. 
 
-Using the \texttt{pipeline} function I also tried out a few different models to see how they performed such as \texttt{sileod/deberta-v3-base-tasksource-nli} and \texttt{MoritzLaurer/mDeBERTa-v3-base-xnli-multilingual-nli-2mil7}. The results were promising, with the \texttt{facebook/bart-large-mnli} model performing well with the synthetic dataset.
+Using the \texttt{pipeline} function I also tried out a few different models to see how they performed such as \texttt{sileod/deberta-v3-base-tasksource-nli} and 
+ \texttt{MoritzLaurer/\newline mDeBERTa-v3-base-xnli-multilingual-nli-2mil7}. The results were promising, with the \texttt{facebook/bart-large-mnli} model performing well with the synthetic dataset.
 
 
 \subsection{Python Library
@@ -116,6 +117,13 @@ The library architecture implements the following design principles:
 
 The implementation includes comprehensive error handling and detailed logging to support easy integration into existing pipelines.
 
+
+\subsection{Router Class}
+\label{router class}
+
+The \texttt{Router} class is the core component of the library. It is responsible for routing user queries to the appropriate topics based on their descriptions. Altohough the class works well, it still needs a lot of work to be done to make it more robust and flexible. As it is now, the class has a lot of hardcoded values and is not very flexible for exmple the fallback model is hardcoded to \texttt{facebook/bart-large-mnli} and pipeline is hardcoded to \texttt{zero\_shot\_classification}. The lack of more vervose error handling and logging makes it difficult to debug and troubleshoot issues. 
+
+Additionally, since \texttt{Router} is the base class, the other classes \texttt{AgentRouter} and \texttt{ToolRouter} inherit from it, which means that any changes made to the base class will affect the other classes as well.
 
 \subsection{Evaluation Framework Creation}
 \label{evaluation framework creation}
@@ -219,152 +227,9 @@ During the Data Cleaning for the \texttt{SoftAge-AI/prompt-eng\_dataset} dataset
 
 
 \subsubsection{4.4.2 Finetuning Process}
-I selected the sequence classification variant of the BART large NLI model (\texttt{facebook/bart-large-mnli}) as our backbone, owing to its strong zero shot and fine tuning performance on sentence pair tasks. The model's configuration was adapted to the 73 target classes as per the dataset and supplied with corresponding \texttt{id2label} and \texttt{label2id} mappings.
+I selected the sequence classification variant of the BART large NLI model (\texttt{facebook/\newline bart-large-mnli}) as our backbone, owing to its strong zero shot and fine tuning performance on sentence pair tasks. The model's configuration was adapted to the 73 target classes as per the dataset and supplied with corresponding \texttt{id2label} and \texttt{label2id} mappings.
 
 For optimisation, I used the \texttt{Trainer} API, which abstracts the training loop and automates gradient accumulation, checkpointing, and metric logging. Finetuning proceeded for one epoch, yielding stable training loss trajectories below 0.001 by step 1240. The final model was saved locally, and its mapping tables were exported to JSON for deployment.
-
-
-\section{System Architecture}
-\subsubsection{4.2.1 Overview of the Two Stage Routing Architecture}
-
-The system architecture implements an elegant yet powerful two stage cascading router design that optimises both performance and functionality. While the system may appear complex at first glance, its fundamental structure follows a logical progression that systematically processes user prompts to deliver optimal results. The architecture consists of two primary components working in sequence: a \textbf{Model Router} followed by a \textbf{Tool Router}.
-
-\subsubsection{4.2.2 Model Router: Intelligent Selection of Processing Engines}
-
-The Model Router serves as the first decision layer in our system, determining which language model should process the incoming prompt. This critical routing decision is based on multiple factors including the prompt's domain, complexity, and specific requirements. The Model Router can operate in three increasingly sophisticated modes:
-
-\textbf{Mode 1: Cost-Performance Optimisation}  
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{figures/model-compx-router.drawio.png}
-    \caption{Simple Complexity Router}
-    \label{fig:simple_complexity_router}
-\end{figure}
-
-
-In its simplest configuration, the Model Router functions as a binary decision maker (as shown in this paper \cite{ong2025routellmlearningroutellms}), choosing between:
-
-\begin{itemize}
-    \item \textbf{Cost effective models}: Smaller, more efficient models with lower computational requirements, suitable for straightforward queries or scenarios with resource constraints.
-    \item \textbf{High performance models}: More capable but resource intensive models reserved for complex reasoning, creative tasks, or specialized knowledge domains.
-\end{itemize}
-
-This mode optimises resource allocation by matching prompt complexity to the appropriate level of model capability, ensuring efficient use of computational resources while maintaining response quality.
-
-\textbf{Mode 2: Domain Specialisation}  
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{figures/model-router.drawio.png}
-    \caption{Domain Specialised Model Router}
-    \label{fig:domain_specialised_model_router}
-\end{figure}
-
-In this more advanced configuration, the Model Router selects from an array of domain specialised models, each trained or fine tuned for excellence in particular knowledge areas. For example:
-
-\begin{itemize}
-    \item Code specialised models for programming tasks.
-    \item Medical models for healthcare queries.
-    \item Legal models for questions about law and regulations.
-    \item Mathematical models for computational and quantitative problems.
-\end{itemize}
-
-This approach leverages the strengths of specialised training to deliver superior results in specific domains compared to general purpose models.
-
-\newpage
-
-\textbf{Mode 3: Hybrid Routing with Cascading Filters}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{figures/hybrid-agent-router.drawio.png}
-    \caption{Hybrid Model Router}
-    \label{fig:hybrid_model_router}
-\end{figure}
-
-A More sophisticated implementation combines the previous approaches into a comprehensive routing strategy. In this configuration, the system:
-
-\begin{enumerate}
-    \item \textbf{Domain Identification}: The system first evaluates the prompt against a set of predefined domain categories to determine whether specialised knowledge is required. This ensures that prompts are routed to models with relevant domain expertise when necessary.
-    \item \textbf{Complexity Assessment}: Next, the prompt is analysed for complexity factors such as ambiguity, required reasoning depth, or expected response length to determine the appropriate performance tier within the identified domain.
-    \item \textbf{Model Selection}: Finally, the system selects the optimal language model by consulting a lookup table or database. This table maps domains and complexity tiers to models that best balance domain specific expertise with computational efficiency and resource constraints.
-\end{enumerate}
-
-This hybrid approach leverages the strengths of both domain aware routing and resource optimisation, ensuring that each prompt is handled based on its content and requirements, while also matching it to models that can deliver high quality results within the available computational resources.
-
-
-To facilitate this process, resources such as a global; Vellum LLM leaderboard\footnote{\url{https://www.vellum.ai/llm-leaderboard}} or the Hugging Face Open LLM Leaderboard\footnote{\url{https://huggingface.co/spaces/open-llm-leaderboard/open_llm_leaderboard}} can be consulted. These leaderboards provide comprehensive, up to date benchmarking data on a wide array of language models and can inform model selection by considering multiple variables, such as:
-
-\begin{itemize}
-    \item \textbf{Average Score Across Benchmarks}: Selecting models based on their overall performance across a suite of standard benchmarks.
-    \item \textbf{Instruction-Following Ability (IFEval)}: Prioritising models that excel at following user instructions accurately and coherently.
-    \item \textbf{Big Bench Hard (BBH)}: Evaluating models on a collection of challenging tasks across domains, such as language understanding, mathematical reasoning, and common sense/world knowledge.
-    \item \textbf{Mathematics Aptitude Test of Heuristics (MATH)}: Identifying models with superior mathematical reasoning abilities.
-    \item \textbf{Environmental Impact}: Factoring in models with lower carbon dioxide emissions for greener operations.
-\end{itemize}
-
-In the following subsubsection, I will expand on how such a repository of could be serverd where 
-
-\subsubsection{Advanced Model Routing Using Multiple Variables}
-
-Model routing can be further enhanced by incorporating a multi variable lookup equation, enabling more nuanced and dynamic decision making. For instance, by adopting a hybrid routing strategy with cascading filters (as in Mode 3), the system can sequentially apply filters based on domain, complexity, instruction following capability, benchmark scores, and sustainability metrics. For example, the system could use a weighted scoring system with:
-
-\begin{enumerate}
-    \item \textbf{User's Previous Scoring}: The system can consider the user's historical ratings of models for specific domains, allowing for personalised routing based on past interactions.
-    \item \textbf{Other Users' Scoring}: The system can aggregate ratings from other users to identify models that are generally well received in specific domains.
-    \item \textbf{Average Score Across Benchmarks}: The system can use the average score across various benchmarks to evaluate model performance objectively.
-\end{enumerate}
-
-Furthermore, using a tagging and filtering system, the Model Router can dynamically adjust based on users requirements. For example, if a user priffers a model with a lower carbon footprint, the system can filter out models that do not meet this requirement. This allows for a more tailored and user centric experience, where the Model Router can adapt to individual preferences and priorities. This flexible approach ensures that each prompt is handled by the model most suited to its unique requirements, maximising both performance, resource efficiency and user satisfaction.
-
-
-\[
-\text{Score}_{m,t} = w_1 \cdot s^{\text{user}}_{m,t} + w_2 \cdot \overline{s}^{\text{others}}_{m,t} + w_3 \cdot s^{\text{benchmark}}_{m,t} + w_4 \cdot s^{\text{sustainability}}_{m} \cdot \delta_{\text{sus}}
-\]
-
-\text{where:}
-\begin{align*}
-&\text{Score}_{m,t} \quad\quad = \text{Total weighted score for model } m \text{ on topic } t \\
-&s^{\text{user}}_{m,t} \quad = \text{User's score for model } m \text{ on topic } t \\
-&\overline{s}^{\text{others}}_{m,t} = \text{Average score of other users for model } m \text{ on topic } t \\
-&s^{\text{benchmark}}_{m,t} = \text{Benchmark score for model } m \text{ on topic } t \\
-&s^{\text{sustainability}}_{m} = \text{Sustainability score for model } m \\
-&w_1, w_2, w_3, w_4 = \text{Respective weights for each term} \\
-&\delta_{\text{sus}} =
-  \begin{cases}
-    1 & \text{if user enabled sustainability} \\
-    0 & \text{otherwise}
-  \end{cases}
-\end{align*}
-
-
-
-\noindent
-    \textbf{Interpretation:} \\
-    This equation computes a weighted sum of model quality and preference indicators. Sustainability can be seamlessly included or omitted. The model with the highest score is selected for processing the prompt for that specific topic.
-    
-\subsubsection{Integration and Information Flow}
-
-The complete system operates as a seamless processing pipeline:
-
-\begin{enumerate}
-    \item A user prompt enters the system.
-    \item The Model Router evaluates the prompt's domain and complexity requirements.
-    \item Based on this evaluation, the appropriate model is selected.
-    \item The selected model begins processing the prompt.
-    \item Concurrently, the Tool Router identifies any external tools required.
-    \item If tools are needed, the model interacts with them via function calling.
-    \item The integrated results from both model processing and tool outputs are combined.
-    \item A comprehensive response is returned to the user.
-\end{enumerate}
-
-This architecture enables sophisticated query handling that dynamically adapts to varying prompt requirements while maintaining system efficiency. By separating model selection from tool selection, the system achieves a high degree of flexibility and extensibility, allowing for independent optimisation of each component.
-
-In this script, I set up a simple command line interface that allows users to input prompts and receive routing results. The script uses the \texttt{AgentRouter}, \texttt{ToolRouter}, and \texttt{Router} classes from the \texttt{llm\_routers} library to route the input prompt to the appropriate agents, tools, and complexity levels. The results are printed in a user friendly format.
-
-For the demo script, I also added a signal handler to gracefully shut down the routers when the user interrupts the script (by pressing ctrl+C). This ensures that any resources used by the routers are properly released.
 
 \subsection{Plugin Integration with Existing Systems}
 

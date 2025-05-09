@@ -1,6 +1,7 @@
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
+import csv
 
 def save_router_test_plot(
     agent_passes, agent_warnings, agent_fails,
@@ -107,15 +108,17 @@ def test_agent_router():
     try:
         agent_router = AgentRouter(
             agents=AGENTS,
-            model_name="facebook/bart-large-mnli",
+            model_name="routellm/bert_mmlu_augmented",
             top_n=3,
             threshold=0.08,
+            fallback_on_error=False,
         )
         tool_router = ToolRouter(
             tools=TOOLS,
-            model_name="facebook/bart-large-mnli",
+            model_name="routellm/bert_mmlu_augmented",
             top_n=3,
             threshold=0.08,
+            fallback_on_error=False,
         )
     except Exception as e:
         print(f"Router initialisation failed - {str(e)}")
@@ -209,7 +212,26 @@ def test_agent_router():
         outdir="plots"
     )
 
+    # Export summary to CSV
+    with open("test_summary.csv", "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Type", "PASS", "WARNING", "FAIL"])
+        writer.writerow(["Agent Router", agent_passes, agent_warnings, agent_fails])
+        writer.writerow(["Tool Router", tool_passes, tool_warnings, tool_fails])
 
+    # Export agent stats to CSV
+    with open("agent_stats.csv", "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Agent", "PASS", "WARNING", "FAIL"])
+        for agent_name, stats in agent_stats.items():
+            writer.writerow([agent_name, stats['pass'], stats['warning'], stats['fail']])
+
+    # Export tool stats to CSV
+    with open("tool_stats.csv", "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Tool", "PASS", "WARNING", "FAIL"])
+        for tool_name, stats in tool_stats.items():
+            writer.writerow([tool_name, stats['pass'], stats['warning'], stats['fail']])
     # Cleanup
     try:
         agent_router.shutdown()

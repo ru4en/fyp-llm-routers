@@ -16,4 +16,14 @@
 - [ ] create the presentation
 - [ ] write the report
 
-## ideas
+## Final Run
+- [ ] Add more to the methoidology section
+- [ ] Add more to the results section
+- [ ] Complete the conclusion
+- [ ] Complete the Discussion
+- [ ] Add Evaluation section to Discussion
+
+- [ ] Start the Presentation
+
+
+Add theoretical justification for NLI-based routing

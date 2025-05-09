@@ -8,13 +8,13 @@
 Revised Content with Chapter Structure
 Chapter 4: Results and Evaluation
 
-In this chapter, I present the evaluation results of both agent and tool routers. First, I'll outline the testing framework that provided a controlled environment for assessment. While the AI generated testing data may not perfectly mirror real world scenarios, it establishes a consistent baseline for performance measurement. I'll analyze the pass/fail/warn rates for both router types and discuss what these metrics reveal about their operational reliability.
+In this chapter, I present the evaluation results of both agent and tool routers. First, I'll outline the testing framework that provided a controlled environment for assessment. While the AI generated testing data may not perfectly mirror real world scenarios, it establishes a consistent baseline for performance measurement. I'll analyse the pass/fail/warn rates for both router types and discuss what these metrics reveal about their operational reliability.
 
 Having implemented these routers as an OpenWebUI plugin, I'll share insights from the integration process. This section examines the technical challenges encountered, adaptation requirements, and overall implementation complexity. I'll provide a candid assessment of how smoothly the routers integrated into an existing ecosystem and what developers should anticipate when adopting similar solutions.
 
 This section evaluates the routers' performance in production conditions using my self-hosted OpenWebUI instance. I'll compare the operational benefits against implementation costs to determine if routers deliver meaningful advantages in real-world applications. The analysis includes benchmarking against alternative NLI models to provide context for decision-making.
 
-For fine-tuned models, I'll analyse performance metrics compared to their base versions. This includes examining accuracy improvements, response quality, and resource efficiency. I'll document challenges encountered during the fine-tuning process, solutions developed, and opportunities for future optimization.
+For fine-tuned models, I'll analyse performance metrics compared to their base versions. This includes examining accuracy improvements, response quality, and resource efficiency. I'll document challenges encountered during the fine-tuning process, solutions developed, and opportunities for future optimisation.
 
 The final section provides a comprehensive assessment of router technology as a productivity enhancement tool. I'll examine whether implementation efforts translate to meaningful improvements in operational efficiency. Additionally, I'll explore alternative architectural approaches beyond NLI that might deliver similar or superior benefits in certain contexts.
 
@@ -57,6 +57,77 @@ The results indicate that the tool router was more effective in selecting the ap
     \label{fig:tool-router-results}
 \end{figure}
 
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \textbf{Type} & \textbf{{Pass}} & \textbf{Warning} & \textbf{Fail} & \textbf{Total} \\
+        \hline
+        \hline
+        \textbf{Agent Router} & 28 & 13 & 29 & 70 \\
+        \textbf{Tool Router} & 45 & 18 & 7 & 70 \\
+        \hline
+    \end{tabular}
+    \caption{Router Performance Results}
+    \label{tab:router-results}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multicolumn{5}{|c|}{\textbf{Tool}} \\
+        \hline
+        \textbf{Tool} & \textbf{Pass} & \textbf{Warning} & \textbf{Fail} & \textbf{Total} \\
+        \hline
+        \textbf{IDE} & 9 & 4 & 2 & 15 \\
+        \textbf{Figma} & 3 & 1 & 3 & 7 \\
+        \textbf{Analytics} & 2 & 0 & 5 & 7 \\
+        \textbf{Excel} & 8 & 2 & 2 & 12 \\
+        \textbf{Calendar} & 4 & 0 & 3 & 7 \\
+        \textbf{Terminal} & 5 & 0 & 7 & 12 \\
+        \textbf{Browser} & 18 & 3 & 1 & 22 \\
+        \textbf{Email} & 6 & 1 & 0 & 7 \\
+        \textbf{Notebook} & 22 & 3 & 2 & 27 \\
+        \textbf{Jira} & 7 & 4 & 4 & 15 \\
+        \textbf{Slack} & 3 & 0 & 1 & 4 \\
+        \textbf{Docker} & 0 & 0 & 1 & 1 \\
+        \textbf{Git} & 0 & 0 & 1 & 1 \\
+        \hline
+    \end{tabular}
+    \caption{Tool Router Performance Results}
+    \label{tab:tool-router-results}
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multicolumn{5}{|c|}{\textbf{Agent}} \\
+        \hline
+        \textbf{Agent} & \textbf{Pass} & \textbf{Warning} & \textbf{Fail} & \textbf{Total} \\
+        \hline
+        \textbf{Adam} & 5 & 0 & 4 & 9 \\
+        \textbf{Eve} & 4 & 3 & 0 & 7 \\
+        \textbf{Alex} & 1 & 1 & 3 & 5 \\
+        \textbf{Sophia} & 2 & 0 & 3 & 5 \\
+        \textbf{Charlie} & 2 & 1 & 3 & 6 \\
+        \textbf{Grace} & 4 & 1 & 0 & 5 \\
+        \textbf{Liam} & 0 & 1 & 4 & 5 \\
+        \textbf{Oliver} & 3 & 0 & 3 & 6 \\
+        \textbf{Max} & 0 & 3 & 2 & 5 \\
+        \textbf{Luna} & 2 & 1 & 3 & 6 \\
+        \textbf{Mia} & 1 & 1 & 4 & 6 \\
+        \textbf{Noah} & 4 & 1 & 0 & 5 \\
+        \hline
+    \end{tabular}
+\caption{Agent Router Performance Results}
+    \label{tab:agent-router-results}
+\end{table}
+
+
 \begin{quote}
     \textbf{Scoring System:}
     \textit{
@@ -68,6 +139,13 @@ The results indicate that the tool router was more effective in selecting the ap
     }
 \end{quote}
 
+
+
+
+
+
+
+
 \subsection{Performance}
 \label{sec:results-performance}
 
@@ -76,7 +154,7 @@ The pipeline functionality of this router seems to clasify the task almost insta
 \subsubsection{How to Improve the Router}
 \label{sec:results-improve-router}
 
-As shown in the results, the agent router performed significantly worse than the tool router. This could be improved by tweaking the descriptions of the agents to be more descriptive and specific to the task at hand. For example, instead of just saying "I am a translator", the agent could say "I am a translator who specializes in legal documents". This would help the router to better understand the capabilities of each agent and select the most appropriate one for the task. Additionally, the agent router could be improved by providing the output from the tool router as input to the agent router. This would allow the agent router to get contextual of the task at hand and select the most appropriate agent for the task.
+As shown in the results, the agent router performed significantly worse than the tool router. This could be improved by tweaking the descriptions of the agents to be more descriptive and specific to the task at hand. For example, instead of just saying "I am a translator", the agent could say "I am a translator who specialises in legal documents". This would help the router to better understand the capabilities of each agent and select the most appropriate one for the task. Additionally, the agent router could be improved by providing the output from the tool router as input to the agent router. This would allow the agent router to get contextual of the task at hand and select the most appropriate agent for the task.
 
 Another way to improve the agent router is to use a fine-tuned model that is specifically designed for routing tasks. As mentioned in the previous chapter, fine-tuning \textit{can improve} the reliability of the model. This could be done by training the model on a dataset of routing tasks, where the model learns to select the most appropriate agent for each task. This would require a significant amount of data and computational resources, but it could lead to an improvement.
 

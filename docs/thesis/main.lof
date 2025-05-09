@@ -1,21 +1,24 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Sequence Diagram\relax }}{11}{figure.caption.9}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Model Router\relax }}{12}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Domain Specialised Model Router\relax }}{13}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Hybrid Model Router\relax }}{13}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Leaderboard based Model Selection\relax }}{14}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Security Guard\relax }}{16}{figure.caption.18}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces UML Diagram of the Router Library\relax }}{11}{figure.caption.14}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Simple Complexity Router\relax }}{15}{figure.caption.20}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Domain Specialised Model Router\relax }}{16}{figure.caption.21}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Hybrid Model Router\relax }}{17}{figure.caption.22}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Example of the Model Router using the OpenWebUI API Where it has successfully routed the user to an Email assistant.\relax }}{20}{figure.caption.26}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Example of the Model Router using the OpenWebUI API Where it has successfully routed the user input to a Codeing assistant.\relax }}{21}{figure.caption.27}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Example of the Model Router using the OpenWebUI API Where it has successfully routed the user input to an chatbot agent.\relax }}{21}{figure.caption.28}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Example of the Tool Router not choosing a tool since the user input was not related to any tool.\relax }}{22}{figure.caption.30}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Example of the Tool Router successfully invoking the discord tool.\relax }}{22}{figure.caption.31}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Example of the Tool Router invoking and running a python code interpreter tool.\relax }}{23}{figure.caption.32}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces UML Diagram of the Router Library\relax }}{20}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Example of the Model Router using the OpenWebUI API Where it has successfully routed the user to an Email assistant.\relax }}{25}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Example of the Model Router using the OpenWebUI API Where it has successfully routed the user input to a Codeing assistant.\relax }}{25}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Example of the Model Router using the OpenWebUI API Where it has successfully routed the user input to an chatbot agent.\relax }}{26}{figure.caption.32}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Example of the Tool Router not choosing a tool since the user input was not related to any tool.\relax }}{27}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Example of the Tool Router successfully invoking the discord tool.\relax }}{27}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Example of the Tool Router invoking and running a python code interpreter tool.\relax }}{28}{figure.caption.36}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Router Performance Results\relax }}{25}{figure.caption.34}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Agent Router Performance Results\relax }}{25}{figure.caption.35}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Tool Router Performance Results\relax }}{26}{figure.caption.36}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Router Performance Results\relax }}{30}{figure.caption.38}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Agent Router Performance Results\relax }}{30}{figure.caption.39}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Tool Router Performance Results\relax }}{31}{figure.caption.40}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

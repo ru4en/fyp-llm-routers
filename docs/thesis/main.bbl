@@ -1,5 +1,10 @@
 \begin{thebibliography}{xx}
 
+\harvarditem{artificialanalysis}{n.d.}{artificialanalysis}
+artificialanalysis  \harvardyearleft n.d.\harvardyearright , `Independent
+  analysis of ai models and api providers'.
+\newline\harvardurl{https://artificialanalysis.ai/}
+
 \harvarditem[Bender et~al.]{Bender, Gebru, McMillan-Major \harvardand\
   Shmitchell}{2021}{bender2021dangers}
 Bender, E.~M., Gebru, T., McMillan-Major, A. \harvardand\ Shmitchell, S.
@@ -28,12 +33,50 @@ Kumar, A., Roh, J., Naseh, A., Karpinska, M., Iyyer, M., Houmansadr, A.
   `Overthink: Slowdown attacks on reasoning llms'.
 \newline\harvardurl{https://arxiv.org/abs/2502.02542}
 
+\harvarditem[Lewis et~al.]{Lewis, Liu, Goyal, Ghazvininejad, Mohamed, Levy,
+  Stoyanov \harvardand\
+  Zettlemoyer}{2019}{lewis2019bartdenoisingsequencetosequencepretraining}
+Lewis, M., Liu, Y., Goyal, N., Ghazvininejad, M., Mohamed, A., Levy, O.,
+  Stoyanov, V. \harvardand\ Zettlemoyer, L.  \harvardyearleft
+  2019\harvardyearright , `Bart: Denoising sequence-to-sequence pre-training
+  for natural language generation, translation, and comprehension'.
+\newline\harvardurl{https://arxiv.org/abs/1910.13461}
+
+\harvarditem{liveperson}{n.d.}{liveperson-routing-ai-agents}
+liveperson  \harvardyearleft n.d.\harvardyearright , `Routing ai agents - route
+  consumers conversationally'.
+\newline\harvardurl{https://developers.liveperson.com/conversation-builder-generative-ai-routing-ai-agents-route-consumers-conversationally.html}
+
+\harvarditem{llmpricing}{n.d.}{llmpricing}
+llmpricing  \harvardyearleft n.d.\harvardyearright , `Llm pricing: Which llms
+  are the best value for money?'.
+\newline\harvardurl{https://sanand0.github.io/llmpricing/}
+
+\harvarditem{lmsys.org}{n.d.}{lmsysroutellm}
+lmsys.org  \harvardyearleft n.d.\harvardyearright , `Routellm: An open-source
+  framework for cost-effective llm routing'.
+\newline\harvardurl{https://lmsys.org/blog/2024-07-01-routellm/}
+
 \harvarditem[Ong et~al.]{Ong, Almahairi, Wu, Chiang, Wu, Gonzalez, Kadous
   \harvardand\ Stoica}{2025}{ong2025routellmlearningroutellms}
 Ong, I., Almahairi, A., Wu, V., Chiang, W.-L., Wu, T., Gonzalez, J.~E., Kadous,
   M.~W. \harvardand\ Stoica, I.  \harvardyearleft 2025\harvardyearright ,
   `Routellm: Learning to route llms with preference data'.
 \newline\harvardurl{https://arxiv.org/abs/2406.18665}
+
+\harvarditem{openai}{n.d.}{openai-gpt4-pricing}
+openai  \harvardyearleft n.d.\harvardyearright , `How much does gpt-4 cost?'.
+\newline\harvardurl{https://help.openai.com/en/articles/7127956-how-much-does-gpt-4-cost}
+
+\harvarditem{Ramos}{n.d.}{jeramos-deepseek}
+Ramos, J.  \harvardyearleft n.d.\harvardyearright , `Deepseek model does not
+  censor tiananmen square'.
+\newline\harvardurl{https://dev.to/jeramos/deepseek-model-does-not-censor-tiananmen-square-2kcb}
+
+\harvarditem{Sankaran}{n.d.}{independent-deepseek}
+Sankaran, V.  \harvardyearleft n.d.\harvardyearright , `China’s new deepseek
+  ai refuses to answer these questions, experts warn'.
+\newline\harvardurl{https://www.independent.co.uk/tech/deepseek-china-questions-refuse-beijing-b2687605.html}
 
 \harvarditem[Schick et~al.]{Schick, Dwivedi-Yu, Dessì, Raileanu, Lomeli,
   Zettlemoyer, Cancedda \harvardand\

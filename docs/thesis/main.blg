@@ -3,44 +3,52 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: agsm.bst
 Database file #1: references.bib
-You've used 9 entries,
+Warning--entry type for "openai-gpt4-pricing" isn't style-file defined
+--line 147 of file references.bib
+Warning--entry type for "independent-deepseek" isn't style-file defined
+--line 153 of file references.bib
+Warning--entry type for "jeramos-deepseek" isn't style-file defined
+--line 159 of file references.bib
+Warning--I didn't find a database entry for "https://aws.amazon.com/blogs/machine-learning/multi-llm-routing-strategies-for-generative-ai-applications-on-aws/"
+You've used 17 entries,
             2909 wiz_defined-function locations,
-            681 strings with 7171 characters,
-and the built_in function-call counts, 89185 in all, are:
-= -- 14781
-> -- 1470
+            712 strings with 8626 characters,
+and the built_in function-call counts, 115391 in all, are:
+= -- 18993
+> -- 1813
 < -- 0
-+ -- 7573
-- -- 469
-* -- 8162
-:= -- 17155
-add.period$ -- 9
-call.type$ -- 9
-change.case$ -- 126
-chr.to.int$ -- 9
-cite$ -- 9
-duplicate$ -- 112
-empty$ -- 250
-format.name$ -- 496
-if$ -- 16032
++ -- 9568
+- -- 574
+* -- 10345
+:= -- 22584
+add.period$ -- 17
+call.type$ -- 17
+change.case$ -- 238
+chr.to.int$ -- 17
+cite$ -- 17
+duplicate$ -- 216
+empty$ -- 458
+format.name$ -- 618
+if$ -- 20675
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 1
-newline$ -- 38
-num.names$ -- 99
-pop$ -- 69
+missing$ -- 5
+newline$ -- 70
+num.names$ -- 180
+pop$ -- 137
 preamble$ -- 1
-purify$ -- 135
+purify$ -- 255
 quote$ -- 0
-skip$ -- 115
+skip$ -- 199
 stack$ -- 0
-substring$ -- 21560
-swap$ -- 18
-text.length$ -- 126
+substring$ -- 27471
+swap$ -- 26
+text.length$ -- 238
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 36
+type$ -- 68
 warning$ -- 0
-while$ -- 192
+while$ -- 360
 width$ -- 0
-write$ -- 128
+write$ -- 226
+(There were 4 warnings)
